@@ -2,15 +2,15 @@
 <head>
     <meta charset="utf-8">
     <title>我的博客</title>
-    <link href="https://www.w3cschool.cn/statics/demosource/myblog/myblog.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="https://www.w3cschool.cn/statics/demosource/myblog/myblog.css" rel="stylesheet" type="text/css" /> -->
     <link rel="stylesheet" type="text/css" href="csstest1.css" >
     <script type="text/javascript" src="jstest1.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="part" id="header">
-            <img class="headImg" src="https://www.w3cschool.cn/statics/demosource/myblog/avatar.png" alt="头像"/>
-            <p class="headText">W3Cschool小师妹</p>
+            <img src="https://www.w3cschool.cn/statics/demosource/myblog/avatar.png" alt="头像"/>
+            <p>W3Cschool小师妹</p>
         </div>
         <div class='part'>
             <h1 class="partTitle"><span>关于我</span></h1>
@@ -21,21 +21,53 @@
             <h1 class="partTitle"><span>我的时间表</span></h1>
             <table>
                 <tr>
-                    <td>Day</td>
-                    <td>Mon</td>
-                    <td>Tue</td>
-                    <td>Wed</td>
-                    <td>Thu</td>
-                    <td>Fri</td>
+                    <th>Day</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
                 </tr>
                 <tr>
                     <td>8:00-8:30</td>
-                    <td>learn</td>
+                    <td class="selected">learn</td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                 </tr>
+                <tr>
+                    <td>9:00-10:00</td>
+                        <td></td>
+                        <td class="selected">Practice</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>10:00-13:30</td>
+                        <td></td>
+                        <td></td>
+                        <td class="selected">Play</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>15:45-17:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="selected">Code</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>18:00-18:15</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="selected">Discuss</td>
+                    </tr>
             </table>
         </div>
         <div class='part'>
@@ -46,26 +78,33 @@
                 <li>JavaScript</li>
             </ul>
         </div>
-        <div class='part'>
+        <div class='part' id="media">
             <h1 class="partTitle"><span>我的媒体</span></h1>
-            <video src=""></video>
+            <video width="320" height="240" autoplay controls>
+                <source src="https://www.w3cschool.cn/statics/demosource/movie.mp4" type="video/mp4">
+            </video>
         </div>
         <div class='part'>
             <h1 class="partTitle"><span>联系我</span></h1>
-            <form>
+            <form id="form">
                 <input type="text" placeholder="Name"/>
                 <br/>
                 <input type="text" placeholder="Email"/>
                 <br/>
-                <input type="text" placeholder="Message"/>
-
+                <textarea placeholder="Message"></textarea>
+                <input type="submit" value="发送" class="submit">
             </form>
         </div>
-        <div class='part'>
+        <div class='part' id="follow">
             <h1 class="partTitle"><span>关注我</span></h1>
-            <img class="contact" src="images/logo1.jpg"/>
-            <img class="contact" src="images/logo2.jpg"/>
-            <img class="contact" src="images/logo3.jpg"/>
+            <div>
+                <a href="#"><img alt="qq" src="https://www.w3cschool.cn/statics/demosource/myblog/qq.png"/></a>
+                <a href="#"><img src="https://www.w3cschool.cn/statics/demosource/myblog/weixin.png"/></a>
+                <a href="#"><img src="https://www.w3cschool.cn/statics/demosource/myblog/weibo.png"/></a>
+            </div>
+        </div>
+        <div class="copyright">
+                © 2017 My Blog. All rights reserved.
         </div>
     </div>
 </body>
