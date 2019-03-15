@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Download from './views/Download.vue'
+import RoomDirectory from './views/RoomDirectory.vue'
 import Error from './views/Error.vue'
 import DownloadWindow from './components/Download_window.vue'
 import DownloadOs from './components/Download_os.vue'
+import Room from './components/Room.vue'
 
 Vue.use(Router)
 
@@ -44,6 +46,22 @@ export default new Router({
     {
       path: '/123',
       redirect: '/about'
+    },
+    {
+      path: '/room',
+      name: 'room',
+      component: RoomDirectory,
+      // children: [
+      //   {
+      //     path: ':id',
+      //     component: Room
+      //   }
+      // ]
+    },
+    {
+      path: '/:id',
+      name: 'room',
+      component: Room,
     },
     {
       path: '/error',
