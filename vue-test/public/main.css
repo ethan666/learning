@@ -1,0 +1,12 @@
+body{
+    margin:0;
+    padding: 10px;
+    background-color: #efefef
+}
+
+.section{
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 10px;
+}

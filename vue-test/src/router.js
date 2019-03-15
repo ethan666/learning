@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Download from './views/Download.vue'
 import Error from './views/Error.vue'
+import DownloadWindow from './components/Download_window.vue'
+import DownloadOs from './components/Download_os.vue'
 
 Vue.use(Router)
 
@@ -25,8 +27,19 @@ export default new Router({
     },
     {
       path: '/download',
+      redirect: '/download/window',
       name: 'download',
-      component: Download
+      component: Download,
+      children: [
+        {
+          path: 'window',
+          component: DownloadWindow
+        },
+        {
+          path: 'os',
+          component: DownloadOs
+        }
+      ]
     },
     {
       path: '/123',
