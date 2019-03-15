@@ -1,11 +1,6 @@
 <template>
   <div class="room-directory">
     <p>房间列表</p>
-    <!-- <ul>
-      <li v-for="(item, index) in list" :key="index+1">
-        {{item}}
-      </li>
-    </ul> -->
     <div id="nav">
       <div v-for="(item, index) in list" :key="index+1">
         <router-link :to="'/'+item">{{item+" "}}</router-link>
@@ -16,7 +11,6 @@
 </template>
 
 <script>
-// import Com
 export default {
   name: 'roomDirectory',
   data: function () {
