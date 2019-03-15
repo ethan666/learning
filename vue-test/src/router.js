@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Download from './views/Download.vue'
+import Error from './views/Error.vue'
 
 Vue.use(Router)
 
@@ -30,6 +31,15 @@ export default new Router({
     {
       path: '/123',
       redirect: '/about'
+    },
+    {
+      path: '/error',
+      name: 'error',
+      component: Error
+    },
+    {
+      path: '/about/*',
+      redirect: '/error'
     }
   ]
 })
