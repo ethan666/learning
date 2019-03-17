@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html{
+            height: 100%;
+        }
+        body{
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+        .sprite{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #f00;
+            margin: auto;
+            left: 0px;
+            right: 0px;
+            top:0px;
+            bottom: 0px;
+            transition: all 3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="sprite">
+    </div>
+    <script>
+        function init(){
+            var items = document.getElementsByClassName('sprite');
+            var item = items[0];
+            if(item){
+                item.style.width = document.body.clientWidth+'px';
+                item.style.height = document.body.clientHeight+'px';
+                console.log(document.body.clientWidth, document.body.clientHeight);
+            }
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
