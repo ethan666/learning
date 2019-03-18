@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>我的博客</h1>
-    <Header :username=username userIcon="https://www.w3cschool.cn/statics/demosource/myblog/avatar.png"></Header>
+    <Header :username=username :userIcon=userIcon></Header>
     <Skills/>
   </div>
 </template>
@@ -14,7 +14,8 @@ export default {
   name: 'about',
   data: function(){
     return {
-      username: '谭义洋'
+      username: '谭义洋',
+      userIcon: 'https://www.w3cschool.cn/statics/demosource/myblog/avatar.png'
     }
   },
   components: {
