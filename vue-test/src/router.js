@@ -7,6 +7,7 @@ import Error from './views/Error.vue'
 import DownloadWindow from './components/Download_window.vue'
 import DownloadOs from './components/Download_os.vue'
 import Room from './components/Room.vue'
+import Users from './views/Users.vue'
 
 Vue.use(Router)
 
@@ -57,6 +58,11 @@ export default new Router({
       //     component: Room
       //   }
       // ]
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: Users,
     },
     {
       path: '/:id',

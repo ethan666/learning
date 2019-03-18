@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/download">Download</router-link> |
+      <router-link to="/users">Users</router-link> |
       <router-link to="/123">Redirect</router-link> |
       <router-link to="/room">Room</router-link>
     </div>
