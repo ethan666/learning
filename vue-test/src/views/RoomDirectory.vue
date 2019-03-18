@@ -2,11 +2,13 @@
   <div class="room-directory">
     <p>房间列表</p>
     <div id="nav">
-      <div v-for="(item, index) in list" :key="index+1">
-        <router-link :to="'/'+item">{{item+" "}}</router-link>
-      </div>
+      <router-link v-for="(item, index) in list" :key="index+1" :to="'/'+item">
+        <div>
+          {{item+" "}}
+        </div>
+      </router-link>
     </div>
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
