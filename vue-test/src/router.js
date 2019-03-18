@@ -50,7 +50,7 @@ export default new Router({
     },
     {
       path: '/room',
-      name: 'room',
+      name: 'rooms',
       component: RoomDirectory,
       // children: [
       //   {
