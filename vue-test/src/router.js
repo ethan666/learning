@@ -65,17 +65,17 @@ export default new Router({
       component: Users,
     },
     {
-      path: '/:id',
-      name: 'room',
-      component: Room,
-    },
-    {
       path: '/error',
       name: 'error',
       component: Error
     },
     {
-      path: '/about/*',
+      path: '/:id',
+      name: 'room',
+      component: Room
+    },
+    {
+      path: '/*',
       redirect: '/error'
     }
   ]
