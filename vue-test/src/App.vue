@@ -8,7 +8,9 @@
       <router-link to="/123">Redirect</router-link> |
       <router-link to="/room">Room</router-link>
     </div>
-    <router-view/>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
