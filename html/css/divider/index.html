@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+
+        .divider {
+            display: table;
+            margin: 16px 0;
+            color: rgba(0,0,0,0.85);
+            font-weight: 500;
+            font-size: 16px;
+            white-space: nowrap;
+            text-align: center;
+            background: transparent;
+        }
+
+        .divider::before{
+            position: relative;
+            top: 50%;
+            display: table-cell;
+            width: 50%;
+            border-top: 1px solid #e8e8e8;
+            transform: translateY(50%);
+            content: '';
+        }
+
+        .divider::after{
+            position: relative;
+            top: 50%;
+            display: table-cell;
+            width: 50%;
+            border-top: 1px solid #e8e8e8;
+            transform: translateY(50%);
+            content: '';
+        }
+
+        .divider-inner-text{
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="divider">
+        <span class="divider-inner-text">标题</span>
+    </div>
+</body>
+
+</html>
