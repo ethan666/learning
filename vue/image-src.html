@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=800px, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue test</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+  <div id="app-1">
+    <img :src="imgSrc" alt="image">
+  </div>
+
+  <script type="text/javascript">
+    //https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3001292911,2962166647&fm=58
+    var vm = new Vue({
+      el: '#app-1',
+      data: {
+        imgSrc: 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3441906220,841788122&fm=58'
+      },
+
+    })
+  </script>
+</body>
+
+</html>

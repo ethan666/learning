@@ -1,115 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=800px, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vue test</title>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=800px, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue test</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
+
 <body>
-    <div id="app-7">
-        <ol>
-          <!--
+  <div id="app-7">
+    <ol>
+      <!--
             现在我们为每个 todo-item 提供 todo 对象
             todo 对象是变量，即其内容可以是动态的。
             我们也需要为每个组件提供一个“key”，稍后再
             作详细解释。
           -->
-          <todo-item
-            v-for="item in groceryList"
-            v-bind:todo="item"
-            v-bind:key="item.id"
-          ></todo-item>
-        </ol>
-      </div>
-      <div id="example">
-        <p>Original message: "{{ message }}"</p>
-        <p>Computed reversed message: "{{ reversedMessage }}"</p>
-      </div>
-      <div id="app-2">
-          <span v-bind:title="message">
-            鼠标悬停几秒钟查看此处动态绑定的提示信息！
-          </span>
-        </div>
-        <div id="app-6">
-            <p>{{ message }}</p>
-            <!-- <input v-model="message"> -->
-            <input :value="message" @input="message = $event.target.value">
-        </div>
+      <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+    </ol>
+  </div>
+  <div id="example">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+  </div>
+  <div id="app-2">
+    <span v-bind:title="message">
+      鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span>
+  </div>
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <!-- <input v-model="message"> -->
+    <input :value="message" @input="message = $event.target.value">
+  </div>
 
-      <div id="app-8" v-if="Math.random() > 0.5">
-          Now you see me
-      </div>
+  <div id="app-8" v-if="Math.random() > 0.5">
+    Now you see me
+  </div>
 
-      <div id="app">
-          <p>{{ foo }}</p>
-          <!-- 这里的 `foo` 不会更新！ -->
-          <button v-on:click="foo = 'baz'">Change it</button>
-        </div>
-    <script type="text/javascript">
- 
-        Vue.component('todo-item', {
-        props: ['todo'],
-        template: '<li>{{ todo.text }}</li>'
-        })
+  <div id="app">
+    <p>{{ foo }}</p>
+    <!-- 这里的 `foo` 不会更新！ -->
+    <button v-on:click="foo = 'baz'">Change it</button>
+  </div>
+  <script type="text/javascript">
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>'
+    })
 
-        var app7 = new Vue({
-        el: '#app-7',
-        data: {
-            groceryList: [
-            { id: 0, text: '蔬菜' },
-            { id: 1, text: '奶酪' },
-            { id: 2, text: '随便其它什么人吃的东西' }
-            ]
-        }
-        })
-
-        var vm = new Vue({
-          el: '#example',
-          data: {
-            message: 'Hello'
+    var app7 = new Vue({
+      el: '#app-7',
+      data: {
+        groceryList: [{
+            id: 0,
+            text: '蔬菜'
           },
-          computed: {
-            // 计算属性的 getter
-            reversedMessage: function () {
-              // `this` 指向 vm 实例
-              return this.message.split('').reverse().join('')
-            }
+          {
+            id: 1,
+            text: '奶酪'
+          },
+          {
+            id: 2,
+            text: '随便其它什么人吃的东西'
           }
-        })
+        ]
+      }
+    })
 
-        var app2 = new Vue({
-          el: '#app-2',
-          data: {
-            message: '页面加载于 ' + new Date().toLocaleString()
-          }
-        })
+    var vm = new Vue({
+      el: '#example',
+      data: {
+        message: 'Hello'
+      },
+      computed: {
+        // 计算属性的 getter
+        reversedMessage: function () {
+          // `this` 指向 vm 实例
+          return this.message.split('').reverse().join('')
+        }
+      }
+    })
 
-        var app6 = new Vue({
-            el: '#app-6',
-            data: {
-              message: 'Hello Vue!'
-            }
-          })
-          
-        new Vue({
-          el:"#app-8",
-          data:{
-            seen:false
-          }
-        });
+    var app2 = new Vue({
+      el: '#app-2',
+      data: {
+        message: '页面加载于 ' + new Date().toLocaleString()
+      }
+    })
 
-        var obj = {
-  foo: 'bar'
-}
+    var app6 = new Vue({
+      el: '#app-6',
+      data: {
+        message: 'Hello Vue!'
+      }
+    })
 
-Object.freeze(obj)
+    new Vue({
+      el: "#app-8",
+      data: {
+        seen: false
+      }
+    });
 
-new Vue({
-  el: '#app',
-  data: obj
-})
-    </script>
+    var obj = {
+      foo: 'bar'
+    }
+
+    Object.freeze(obj)
+
+    new Vue({
+      el: '#app',
+      data: obj
+    })
+  </script>
 </body>
+
 </html>
