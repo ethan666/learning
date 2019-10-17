@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>两列式页面布局</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .head {
+        height: 200px;
+        background: #ccc;
+      }
+      .footer {
+        height: 200px;
+        background: #ccc;
+      }
+      .main-box {
+        margin: 10px auto;
+        width: 960px;
+      }
+      .main-box::after {
+        display: block;
+        visibility: hidden;
+        content: "";
+        clear: both;
+      }
+      .main-left {
+        float: left;
+        width: 750px;
+        height: 900px;
+        background: #f00;
+      }
+      .main-right {
+        float: right;
+        width: 200px;
+        height: 600px;
+        background: #0f0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="head"></div>
+    <div class="main-box">
+      <div class="main-left"></div>
+      <div class="main-right"></div>
+    </div>
+    <div class="footer"></div>
+  </body>
+</html>
