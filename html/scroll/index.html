@@ -6,24 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>scroll</title>
     <style>
-      .container {
-        height: 500px;
+      .containor {
+        width: 200px;
+        height: 200px;
         overflow-y: scroll;
       }
       .content {
-        height: 2000px;
-        width: 100px;
+        height: 1000px;
+        white-space: normal;
+        word-wrap: break-word;
+        word-break: break-all;
         background: #0f0;
       }
     </style>
   </head>
 
   <body>
-    <div class="container">
-      <div class="content">
-        asfdasfdsaf daaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa
-        aaaaaaaaaa aaaaa afdasfdasfdsa afdasfdasfds aadfad 343fds
-      </div>
+    <div class="containor">
+      <p class="content">
+        asfdasfdsafdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        aaaaaaaaaaaaaaaafdasfdasfdsaafdasfdasfdsaadfad343fds
+      </p>
     </div>
   </body>
 </html>
