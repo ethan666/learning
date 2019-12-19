@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
-    #sourceText{
+    #sourceText {
       width: 100%;
     }
-    #regexp{
+
+    #regexp {
       width: 100%;
     }
-    #output{
+
+    #output {
       width: 100%;
       margin: 10px 0;
     }
   </style>
   <script src="./regexp.js"></script>
 </head>
+
 <body>
   <textarea id="sourceText" rows="20"></textarea>
   <input type="text" id="regexp" value="(?<=v-decorator=.+?').+?(?=')">
   <input type="button" value="提取" onclick="getResult()">
   <textarea id="output"></textarea>
 </body>
+
 </html>

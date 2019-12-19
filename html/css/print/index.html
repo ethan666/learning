@@ -18,13 +18,22 @@
         margin: 0;
         /* background: #0f0; */
       }
-      @media print {
+      /* @media print {
         .d1 {
           width: 800pt;
-          /* height: 100pt; */
           font-size: 14pt;
           height: auto;
         }
+      } */
+    </style>
+    <style type="text/css" media="print">
+      @page {
+        size: A4 landscape;
+      }
+      .d1 {
+        width: 800pt;
+        font-size: 14pt;
+        height: auto;
       }
     </style>
   </head>
