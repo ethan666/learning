@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>event</title>
+    <style>
+      .containor {
+        width: 200px;
+        height: 200px;
+        border: 1px solid #f00;
+        background: #0f0;
+        position: relative;
+      }
+      .btn {
+        position: absolute;
+        left: 50px;
+        top: 195px;
+      }
+      .child {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+      }
+      .index1 {
+        background: #ff0;
+        left: 10px;
+      }
+      .index2 {
+        background: #0ff;
+        left: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 不生效，不能直接写方法名，需要写执行语句 -->
+    <!-- <button onclick="onClick">请点击</button> -->
+
+    <button onclick="onClick()">请点击</button>
+
+    <div
+      class="containor"
+      onclick="onClickBox(event)"
+      onmouseover="onMouseoverBox(event)"
+      onmouseout="onMouseoutBox(event)"
+    >
+      <div class="child index1"></div>
+      <div class="child index2"></div>
+    </div>
+    <script>
+      function onClick() {
+        console.log("click");
+      }
+      function onClickBox(event) {
+        console.log(event);
+      }
+      function onMouseoverBox(event) {
+        if (event.currentTarget.contains(event.relatedTarget)) {
+          return;
+        }
+        console.log("mouseover");
+      }
+      function onMouseoutBox(event) {
+        if (event.currentTarget.contains(event.relatedTarget)) {
+          return;
+        }
+        console.log("mouseout");
+      }
+    </script>
+  </body>
+</html>
