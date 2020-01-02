@@ -1,0 +1,9 @@
+<Filter>
+  <Within>
+    <PropertyName>土耳其</PropertyName> 
+    <gml:Envelope>
+      <gml:lowerCorner>10,10</gml:lowerCorner> 
+      <gml:upperCorner>20 20</gml:upperCorner>
+    </gml:Envelope>
+  </Within>
+</Filter>

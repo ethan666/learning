@@ -1,0 +1,10 @@
+<GetFeature xmlns="http://www.opengis.net/wfs" service="WFS" version="1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
+  <Query typeName="osm:一带一路国家3300W" srsName="EPSG:4326" xmlns:osm="http://openstreemap.org">
+    <Filter xmlns="http://www.opengis.net/ogc">
+      <PropertyIsEqualTo>
+        <PropertyName>国家</PropertyName>
+        <Literal>土耳其</Literal>
+      </PropertyIsEqualTo>
+    </Filter>
+  </Query>
+</GetFeature>

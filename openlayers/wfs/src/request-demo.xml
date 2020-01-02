@@ -1,0 +1,16 @@
+<GetFeature xmlns="http://www.opengis.net/wfs" service="WFS" version="1.1.0" outputFormat="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
+  <Query typeName="osm:water_areas" srsName="EPSG:3857" xmlns:osm="http://openstreemap.org">
+    <Filter xmlns="http://www.opengis.net/ogc">
+      <And>
+        <PropertyIsLike wildCard="*" singleChar="." escapeChar="!">
+          <PropertyName>name</PropertyName>
+          <Literal>Mississippi*</Literal>
+        </PropertyIsLike>
+        <PropertyIsEqualTo>
+          <PropertyName>waterway</PropertyName>
+          <Literal>riverbank</Literal>
+        </PropertyIsEqualTo>
+      </And>
+    </Filter>
+  </Query>
+</GetFeature>
