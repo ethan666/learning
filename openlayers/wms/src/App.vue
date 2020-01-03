@@ -23,11 +23,11 @@ export default {
       new TileLayer({
         source: new TileWMS({
           url:
-            "http://www.geodata.gov.cn/mapserver/wms/services/1999zblx/WMSServer",
+            "http://www.geodata.gov.cn/iserver/services/map-ZhuanTiTu/wms130/qg600wqgsdmtddfb",
           params: {
             // TILED: true,
-            LAYERS: "1999zblx",
-            REQUEST: "GetMap",
+            // REQUEST: "GetMap",
+            LAYERS: "qg600wqgsdmtddfb",
             VERSION: "1.1.1"
             // FORMAT: "image/png",
             // TRANSPARENT: true
