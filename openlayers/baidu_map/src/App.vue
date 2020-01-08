@@ -1,17 +1,9 @@
 <template>
   <div id="app">
-    <!-- <div id="map" class="map">
-      <bm-driving
-        start="新街口"
-        end="新街口"
-        startCity="北京"
-        endCity="南京"
-        :auto-viewport="true"
-        :waypoints="['呼和浩特', { lng: 112.53, lat: 37.87 }, '陕西兵马俑']"
-      ></bm-driving>
-    </div> -->
+    <div id="map" class="map">
+    </div>
 
-    <baidu-map>
+    <!-- <baidu-map>
       <bm-view class="map"> </bm-view>
       <bm-driving
         start="硚口路"
@@ -21,7 +13,7 @@
         :auto-viewport="true"
         :waypoints="['呼和浩特', { lng: 112.53, lat: 37.87 }, '陕西兵马俑']"
       ></bm-driving>
-    </baidu-map>
+    </baidu-map> -->
 
     <select id="mapType" name="mapTypes" @change="changeMapImg">
       <option selected value="1">osm</option>
@@ -45,37 +37,81 @@ import BmDriving from "vue-baidu-map/components/search/Driving.vue";
 
 import { transform } from "ol/proj";
 
-// Vue.use(BaiduMap, {
-//   ak: "0ec6jPcr5k4yloyilfZQchyvnMCuDyhR"
-// });
+import axios from 'axios'
 
 export default {
   name: "app",
   components: {
-    BaiduMap,
-    BmView,
-    BmDriving
   },
   mounted() {
-    // this.map = new Map({
-    //   layers: [
-    //     new TileLayer({
-    //       source: new OSM()
-    //     })
-    //   ],
-    //   view: new View({
-    //     center: transform([110, 30], "EPSG:4326", "EPSG:3857"),
-    //     zoom: 4
-    //   }),
-    //   target: "map"
-    // });
+    this.map = new Map({
+      layers: [
+        new TileLayer({
+          source: new OSM()
+        })
+      ],
+      view: new View({
+        center: transform([114.25, 30.58], "EPSG:4326", "EPSG:3857"),
+        zoom: 10
+      }),
+      target: "map"
+    });
+
+    // this.getLocation();
   },
   data() {
     return {
-      map: null
+      map: null,
+      center: null,
     };
   },
   methods: {
+    getLocation(){
+      axios.get('/bdLocation', {
+        params:{
+          qt: 'ipLocation',   
+          t: new Date().getTime()
+        }
+      })
+      .then(function (response) {
+        if(response.status === 200){
+          return response.data
+        }
+        throw "request error"
+        // handle success
+      })
+      .then(data => {
+        const { ipLoc } = data
+        const { content } = ipLoc
+        const { location } = content
+        const {lng, lat} = location
+        return [lng/100000, lat/100000]
+      })
+      // .then(data => {
+      //   const { rgc } = data
+      //   if(rgc && rgc.code === 0){
+      //     return rgc.result
+      //   }
+      //   throw "rgc error"
+      // })
+      // .then(result => {
+      //   const {location} = result
+      //   const {lng, lat} = location
+      //   return [lng, lat]
+      // })
+      .then(center => {
+        const view = this.map.getView()
+        view.setCenter(transform(center, "EPSG:4326", "EPSG:3857"))
+        view.setZoom(12)
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(`error:${error}`);
+      })
+      .finally(function () {
+        // always executed
+      });
+    },
     changeMapImg(event) {
       const value = event.target.value;
       console.log(`value:${value}`);
@@ -104,7 +140,7 @@ export default {
 }
 .map {
   width: 100%;
-  height: 600px;
+  height: 400px;
 }
 #mapType {
   margin-top: 10px;
