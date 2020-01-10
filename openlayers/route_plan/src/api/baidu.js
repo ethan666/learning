@@ -40,7 +40,7 @@ export function placeSuggestion(query) {
       ak: "7CvvRepDRLFpqOwdxqaEYQhQLh26Uess",
       query,
       region: "全国",
-      coord_type: 1,
+      ret_coordtype: "gcj02ll",
       output: "json"
     }
   });

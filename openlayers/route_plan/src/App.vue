@@ -56,19 +56,20 @@
         <div class="plan-wrap">
           <a-radio-group v-model="methodsIndex" @change="onChangeMethod">
             <a-radio-button :value="0">推荐方案</a-radio-button>
+            <a-radio-button :value="4">高速优先</a-radio-button>
             <a-radio-button :value="5">躲避拥堵</a-radio-button>
-            <a-radio-button :value="6">避免收费</a-radio-button>
           </a-radio-group>
-          <ul class="plans">
-            <li
-              v-for="(plan, index) in plans"
-              :key="index"
-              @click="openPlanDetail(plan)"
+
+          <div v-for="(plan, index) in plans" :key="index">
+            <div
+              class="planTitle dirtag"
+              :class="{ current: index === planIndex }"
+              @click="openPlanDetail(plan, index)"
             >
               <p class="dir_tag">{{ plan.tag }}</p>
-              <p>
+              <p class="dir_base_info">
                 {{
-                  `约${Math.round(plan.duration / 60)}分钟 | 约${(
+                  `约${Math.round(plan.duration / 60)}分钟 | ${(
                     plan.distance / 1000
                   ).toFixed(1)}公里`
                 }}
@@ -76,14 +77,38 @@
               <p class="dir_passby" :title="getPassby(plan.steps, true)">
                 {{ `途径：${getPassby(plan.steps)}` }}
               </p>
-              <ul class="steps" v-if="plan.open">
-                <li v-for="(step, si) in plan.steps" :key="si">
-                  <p>{{ step.road_name }}</p>
-                  <p>{{ `${step.distance}米` }}</p>
-                </li>
-              </ul>
-            </li>
-          </ul>
+            </div>
+            <dl class="steps" v-if="plan.open">
+              <dt class="start" :title="origin.name">
+                <span class="name">{{ `从 ${origin.name}出发` }}</span>
+              </dt>
+              <dt
+                class="route"
+                v-for="(step, si) in plan.steps"
+                :key="si"
+                :class="{
+                  'turn-0': step.direction === 0,
+                  'turn-1': step.direction === 1,
+                  'turn-2': step.direction === 2,
+                  'turn-3': step.direction === 3,
+                  'turn-4': step.direction === 4,
+                  'turn-5': step.direction === 5,
+                  'turn-6': step.direction === 6,
+                  'turn-7': step.direction === 7,
+                  'turn-8': step.direction === 8,
+                  'turn-9': step.direction === 9,
+                  'turn-10': step.direction === 10,
+                  'turn-11': step.direction === 11
+                }"
+              >
+                <p class="name">{{ step.road_name }}</p>
+                <p class="distance grey">{{ `${step.distance}米` }}</p>
+              </dt>
+              <dt class="end" :title="destination.name">
+                <span class="name">{{ `到达终点 ${destination.name}` }}</span>
+              </dt>
+            </dl>
+          </div>
         </div>
         <ul class="search_place_result" v-if="searchResultVisible">
           <li
@@ -154,13 +179,14 @@ export default {
     return {
       map: null,
       vectorroute: null,
-      vectorHandselectstart: null,
-      vectorHandselectend: null,
-      vectorresaw: null,
-      methodsIndex: 0,
+      // vectorHandselectstart: null,
+      // vectorHandselectend: null,
+      // vectorresaw: null,
+      methodsIndex: 0, //选择方案值，比如推荐方案、避免拥堵
+      planIndex: 0, //路线方案索引，比如路线1、路线2
       origin: {
         name: "武汉城市广场",
-        location: { lat: 30.582336, lng: 114.25917 }
+        location: { lat: 30.57854, lng: 114.247345 }
       },
       destination: {
         name: "光谷广场-地铁站",
@@ -168,7 +194,7 @@ export default {
       },
       locsug: {
         name: "我的位置",
-        location: { lat: 30.582336, lng: 114.25917 }
+        location: { lat: 30.57854, lng: 114.247345 }
       },
       startCloseVisible: true,
       endCloseVisible: true,
@@ -219,10 +245,14 @@ export default {
     },
     onSelectSearchResult(result) {
       const { name, location } = result;
+
+      const rl = coordtransform.gcj02towgs84(location.lng, location.lat);
+      // 坐标转化，转为WGS84
+      const nl = { lng: rl[0], lat: rl[1] };
       if (this.searchType === 0) {
-        this.origin = { name, location };
+        this.origin = { name, location: nl };
       } else if (this.searchType === 1) {
-        this.destination = { name, location };
+        this.destination = { name, location: nl };
       }
       this.searchResultVisible = false;
       this.searchType = -1;
@@ -302,11 +332,25 @@ export default {
         this.locsugVisible = false;
       }
     },
-    openPlanDetail(plan) {
-      plan.open = !plan.open;
-      this.plans = [...this.plans];
+    openPlanDetail(plan, index) {
+      // 当前索引
+
+      if (index === this.planIndex) {
+        plan.open = !plan.open;
+        this.plans = [...this.plans];
+      } else {
+        const oldPlan = this.plans[this.planIndex];
+        oldPlan.open = false;
+        plan.open = true;
+        this.planIndex = index;
+        this.plans = [...this.plans];
+
+        //地图切换路线
+        this.handleRoute(this.plans, this.planIndex);
+      }
     },
     onChangeMethod() {
+      this.planIndex = 0;
       this.queryDrivingAndDraw();
     },
     queryDrivingAndDraw() {
@@ -327,16 +371,15 @@ export default {
         })
         .then(data => {
           if (data.status === 0) {
-            // this.handleRoute(data.result, tag);
             this.plans = data.result.routes;
-            this.handleRoute(data.result);
+            this.handleRoute(this.plans, this.planIndex);
           }
         });
     },
     queryLineHandler() {
       this.onChangeMethod();
     },
-    handleRoute(data, index) {
+    handleRoute(routes, index) {
       if (index === undefined) {
         index = 0; // 默认选择第一条路线
       }
@@ -344,18 +387,18 @@ export default {
         // 消除上一次生成的路线
         this.map.removeLayer(this.vectorroute);
       }
-      if (this.vectorHandselectstart !== null) {
-        // 消除点击生成的起点坐标，否则会有偏移
-        this.map.removeLayer(this.vectorHandselectstart);
-      }
-      if (this.vectorHandselectend !== null) {
-        // 消除点击生成的终点坐标
-        this.map.removeLayer(this.vectorHandselectend);
-      }
-      if (this.vectorresaw !== null) {
-        this.map.removeLayer(this.vectorresaw);
-      }
-      let result = data.routes[index];
+      // if (this.vectorHandselectstart !== null) {
+      //   // 消除点击生成的起点坐标，否则会有偏移
+      //   this.map.removeLayer(this.vectorHandselectstart);
+      // }
+      // if (this.vectorHandselectend !== null) {
+      //   // 消除点击生成的终点坐标
+      //   this.map.removeLayer(this.vectorHandselectend);
+      // }
+      // if (this.vectorresaw !== null) {
+      //   this.map.removeLayer(this.vectorresaw);
+      // }
+      let result = routes[index];
 
       let origin = coordtransform.gcj02towgs84(
         result.origin.lng,
@@ -451,12 +494,13 @@ export default {
         }
       });
       this.map.addLayer(this.vectorroute);
-      // const view = this.map.getView();
-      // let extent = this.vectorroute.getSource().getExtent(); // 合适比例缩放居中
-      // view.fit(extent, this.map.getSize());
-      // this.flag = "";
-      // view.setZoom(15);
-      // view.setCenter(startC);
+      const view = this.map.getView();
+      let extent = this.vectorroute.getSource().getExtent(); // 合适比例缩放居中
+      view.fit(extent, {
+        padding: [80, 50, 80, 400],
+        minResolution: 50,
+        duration: 500
+      });
     }
   }
 };
@@ -576,27 +620,137 @@ export default {
       height: 300px;
       overflow: auto;
       padding: 0 14px;
-      .plans {
-        padding-inline-start: 0px;
-        li {
-          list-style-type: none;
+      .planTitle {
+        position: relative;
+        padding: 24px 10px 16px;
+        border-top: 1px solid #f3f3f3;
+        background: #fff;
+        font-size: 14px;
+        cursor: pointer;
+        .dir_tag {
+          position: absolute;
+          top: 0;
+          left: 0;
+          font-size: 12px;
+          height: 23px;
+          padding: 0 14px;
+          line-height: 23px;
+          background: #e0f0ff;
+          color: #3c3d3f;
+        }
+        .dir_base_info {
+          display: block;
+          font-size: 12px;
+          height: 14px;
+          line-height: 14px;
+          color: #3c3d3f;
+          margin: 10px 0;
+        }
+        .dir_passby {
+          font-size: 12px;
+          color: #7c7e7d;
+          margin: 0;
+        }
+      }
+      .current {
+        background: #f4f9fd;
+        .dir_tag {
+          background: #3d93fd;
+          color: #fff;
+        }
+      }
+      .steps {
+        font-size: 12px;
+        text-indent: 5px;
+        dt {
           position: relative;
-          padding: 24px 10px 16px;
-          border-top: 1px solid #f3f3f3;
-          background: #fff;
-          font-size: 14px;
-          cursor: pointer;
-          .dir_tag {
+          margin-left: 35px;
+          border-bottom: 1px solid #f0f0f0;
+
+          height: 56px;
+          line-height: 28px;
+          text-indent: 10px;
+          &::before {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: -31px;
+            box-sizing: content-box;
+
+            border-radius: 50%;
+            background-color: #fff;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            text-indent: 0;
+            text-align: center;
             font-size: 12px;
-            height: 23px;
-            padding: 0 14px;
-            line-height: 23px;
-            background: #e0f0ff;
-            color: #3c3d3f;
+            z-index: 10;
+
+            content: " ";
+            margin-top: -10px;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            color: #fff;
+            background-image: url("./assets/diricon.png");
+            background-size: 671px 238px;
           }
+          &:not(:last-child)::after {
+            position: absolute;
+            content: " ";
+            top: 20px;
+            left: -22px;
+            height: 105%;
+            width: 4px;
+            z-index: 9;
+            background-color: #e5e7e8;
+          }
+        }
+        .start {
+          line-height: 56px;
+          &::before {
+            background-position: -47px -104px;
+          }
+        }
+        .end {
+          line-height: 56px;
+          &::before {
+            background-position: -126px -104px;
+          }
+        }
+        .route {
+          .name {
+            margin: 0;
+          }
+          .distance {
+            line-height: 14px;
+            margin: 0;
+            color: #999;
+          }
+        }
+        .turn-0,
+        .turn-1,
+        .turn-2,
+        .turn-3,
+        .turn-4,
+        .turn-5,
+        .turn-6,
+        .turn-7,
+        .turn-8,
+        .turn-9,
+        .turn-10,
+        .turn-11 {
+          &::before {
+            background-position: -124px -23px;
+            border: 1px solid #ddd;
+            width: 21px;
+            height: 21px;
+            margin-top: -12px;
+          }
+        }
+        .name {
+          color: #565656;
+          font-size: 14px;
+          font-weight: 700;
         }
       }
     }
