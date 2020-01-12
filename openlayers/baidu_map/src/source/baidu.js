@@ -34,7 +34,7 @@ var urls = [0, 1, 2, 3].map(function(sub) {
   return (
     "http://maponline" +
     sub +
-    ".bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=1&udt=20191119"
+    ".bdimg.com/tile/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&scaler=1&udt=20200102"
   );
 });
 
