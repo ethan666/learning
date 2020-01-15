@@ -4,8 +4,9 @@
 
     <select id="mapType" name="mapTypes" @change="changeTile">
       <option selected value="1">osm</option>
-      <option value="2">google</option>
-      <option value="3">baidu</option>
+      <option value="2">google.com</option>
+      <option value="3">google.cn</option>
+      <option value="4">baidu</option>
     </select>
     <select name="places" id="places" @change="changePlace">
       <option v-for="(place, index) in places" :key="index" :value="index+''">{{place.name}}</option>
