@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import IconTest from "./views/IconTest.vue";
 import DebounceTest from "./views/lodash/DebounceTest.vue";
+import DebounceTest2 from "./views/lodash/DebounceTest2.vue";
 
 Vue.use(Router);
 
@@ -9,6 +10,7 @@ export default new Router({
   mode: "history",
   routes: [
     { path: "/icon", component: IconTest },
-    { path: "/lodash", component: DebounceTest }
+    { path: "/lodash/debounce1", component: DebounceTest },
+    { path: "/lodash/debounce2", component: DebounceTest2 }
   ]
 });

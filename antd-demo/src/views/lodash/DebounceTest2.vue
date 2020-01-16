@@ -1,25 +1,26 @@
 <template>
   <div>
-    <!-- <button @click="onClick">显示讯息</button> -->
     <input @input="onInput" />
   </div>
 </template>
 
 <script>
-import _ from "lodash";
 import { checkType } from "../../utils/util";
+import { debounce } from "../../utils/lodash";
 
 export default {
-  name: "DebounceTest",
+  name: "DebounceTest2",
   data() {
     return {
       pp: "3423ewr"
     };
   },
   methods: {
-    onInput: _.debounce(function(event) {
+    onInput: debounce(function(event) {
       console.log(
-        `input:${event.target.value},this:${checkType(this)},this.pp:${this.pp}`
+        `this:${checkType(this)},this.pp:${this.pp},Results for "${
+          event.target.value
+        }"`
       );
     }, 500)
   }
