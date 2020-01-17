@@ -6,7 +6,7 @@
 
 <script>
 import { checkType } from "../../utils/util";
-import { debounce } from "../../utils/lodash";
+import { debounce } from "@/utils/lodash";
 
 export default {
   name: "DebounceTest2",
