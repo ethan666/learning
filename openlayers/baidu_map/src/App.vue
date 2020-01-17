@@ -134,7 +134,7 @@ export default {
           source:googleSource
         })
       }
-       else if (type === "3") {
+       else if (type === "4") {
         this.tileLayer = new TileLayer({
           source: baiduSource
         });
