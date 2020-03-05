@@ -1,32 +1,32 @@
 <template>
-  <div></div>
+  <div />
 </template>
 
 <script>
 import { getLocation } from '../../api/baidu'
 export default {
-    name:'PromiseTest',
-    mounted(){
-      getLocation({
-        qt: "ipLocation",
-        t: new Date().getTime()
-      })
+  name: 'PromiseTest',
+  mounted () {
+    getLocation({
+      qt: 'ipLocation',
+      t: new Date().getTime()
+    })
       .then(res => {
-        if(res.status === 200){
+        if (res.status === 200) {
           return res.data
         }
       })
       .then(data => {
         const { rgc: { code } } = data
-        if(code === 1){
+        if (code === 1) {
           console.log('ok')
-        }else{
-          throw '接口返回数据异常'
+        } else {
+          throw new Error('接口返回数据异常')
         }
       })
       .catch(err => {
         console.log(`error:${err}`)
       })
-    }
+  }
 }
 </script>
