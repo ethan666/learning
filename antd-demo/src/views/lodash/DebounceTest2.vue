@@ -22,14 +22,14 @@ export default {
           event.target.value
         }"`
       )
-    }, 500),
-    onInput: throttle(function (event) {
-      console.log(
-        `this:${checkType(this)},this.pp:${this.pp},Results for "${
-          event.target.value
-        }"`
-      )
     }, 500)
+    // onInput: throttle(function (event) {
+    //   console.log(
+    //     `this:${checkType(this)},this.pp:${this.pp},Results for "${
+    //       event.target.value
+    //     }"`
+    //   )
+    // }, 500)
   }
 }
 </script>
