@@ -1,5 +1,7 @@
 <template>
-  <div />
+  <div>
+    promise test
+  </div>
 </template>
 
 <script>
