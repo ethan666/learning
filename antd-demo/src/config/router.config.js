@@ -14,6 +14,7 @@ export const constantRouterMap = [
   { path: '/icon', component: IconTest },
   { path: '/asyncRouter', component: AsyncRouter },
   { path: '/table/resize', component: TableResize },
+  { path: '/table/editable', component: () => import(/* webpackChunkName: "fail" */ '@/views/table/Editable') },
   { path: '/lodash/debounce1', component: DebounceTest },
   { path: '/lodash/debounce2', component: DebounceTest2 },
   {

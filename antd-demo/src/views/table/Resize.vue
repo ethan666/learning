@@ -1,5 +1,8 @@
 <template>
-  <div id="app" style="margin: 24px">
+  <div
+    id="app"
+    style="margin: 24px"
+  >
     <div>
       <p style="margin-bottom: 24px">
         Current ant-design-vue version: {{ version }}
@@ -7,9 +10,14 @@
         section).
       </p>
     </div>
-    <a-divider/>
+    <a-divider />
     <!-- code -->
-    <a-table bordered :columns="columns" :components="components" :dataSource="data">
+    <a-table
+      bordered
+      :columns="columns"
+      :components="components"
+      :data-source="data"
+    >
       <template v-slot:action>
         <a href="javascript:;">Delete</a>
       </template>
@@ -18,100 +26,100 @@
 </template>
 
 <script>
-import Vue from "vue";
-import moment from "moment";
-import { version } from "ant-design-vue";
-import VueDraggableResizable from "vue-draggable-resizable";
+import Vue from 'vue'
+import moment from 'moment'
+import { version } from 'ant-design-vue'
+import VueDraggableResizable from 'vue-draggable-resizable'
 
-Vue.component("vue-draggable-resizable", VueDraggableResizable);
+Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 const columns = [
   {
-    title: "Date",
-    dataIndex: "date",
+    title: 'Date',
+    dataIndex: 'date',
     width: 200
   },
   {
-    title: "Amount",
-    dataIndex: "amount",
+    title: 'Amount',
+    dataIndex: 'amount',
     width: 200,
-    defaultSortOrder: "descend",
+    defaultSortOrder: 'descend',
     sorter: (a, b) => a.amount - b.amount
   },
   {
-    title: "Type",
-    dataIndex: "type",
+    title: 'Type',
+    dataIndex: 'type',
     width: 100,
     filters: [
       {
-        text: "income",
-        value: "income"
+        text: 'income',
+        value: 'income'
       },
       {
-        text: "outcome",
-        value: "outcome"
+        text: 'outcome',
+        value: 'outcome'
       }
     ],
-    onFilter: (value, record) => record.type === value,
+    onFilter: (value, record) => record.type === value
   },
   {
-    title: "Note",
-    dataIndex: "note",
+    title: 'Note',
+    dataIndex: 'note',
     width: 100
   },
   {
-    title: "Action",
-    key: "action",
-    scopedSlots: { customRender: "action" }
+    title: 'Action',
+    key: 'action',
+    scopedSlots: { customRender: 'action' }
   }
-];
+]
 const data = [
   {
     key: 0,
-    date: "2018-02-11",
+    date: '2018-02-11',
     amount: 120,
-    type: "income",
-    note: "transfer"
+    type: 'income',
+    note: 'transfer'
   },
   {
     key: 1,
-    date: "2018-03-11",
+    date: '2018-03-11',
     amount: 243,
-    type: "income",
-    note: "transfer"
+    type: 'income',
+    note: 'transfer'
   },
   {
     key: 2,
-    date: "2018-04-11",
+    date: '2018-04-11',
     amount: 98,
-    type: "outcome",
-    note: "transfer"
+    type: 'outcome',
+    note: 'transfer'
   }
-];
-const draggingMap = {};
+]
+const draggingMap = {}
 columns.forEach(col => {
-  draggingMap[col.key] = col.width;
-});
-const draggingState = Vue.observable(draggingMap);
+  draggingMap[col.key] = col.width
+})
+const draggingState = Vue.observable(draggingMap)
 const ResizeableTitle = (h1) => {
-  const {props, children} = h1
-  let thDom = null;
-  const { key, ...restProps } = props;
+  const { props, children } = h1
+  let thDom = null
+  const { key, ...restProps } = props
   const col = columns.find(col => {
-    const k = col.dataIndex || col.key;
-    return k === key;
-  });
+    const k = col.dataIndex || col.key
+    return k === key
+  })
   if (!col.width) {
-    return <th {...restProps}>{children}</th>;
+    return <th {...restProps}>{children}</th>
   }
   const onDrag = (x, y) => {
-    draggingState[key] = 0;
-    col.width = Math.max(x, 1);
-  };
+    draggingState[key] = 0
+    col.width = Math.max(x, 1)
+  }
 
   const onDragstop = () => {
-    draggingState[key] = thDom.getBoundingClientRect().width;
-  };
+    draggingState[key] = thDom.getBoundingClientRect().width
+  }
   return (
     <th
       {...restProps}
@@ -133,27 +141,27 @@ const ResizeableTitle = (h1) => {
         onDragstop={onDragstop}
       />
     </th>
-  );
-};
+  )
+}
 
 export default {
-  name: "Resize",
-  data() {
+  name: 'Resize',
+  data () {
     this.components = {
       header: {
         cell: ResizeableTitle
       }
-    };
+    }
     return {
       moment,
       version,
       console: console,
       data,
       columns
-    };
+    }
   },
   methods: {}
-};
+}
 </script>
 
 <style lang="less">
