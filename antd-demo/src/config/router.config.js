@@ -15,5 +15,12 @@ export const constantRouterMap = [
   { path: '/asyncRouter', component: AsyncRouter },
   { path: '/table/resize', component: TableResize },
   { path: '/lodash/debounce1', component: DebounceTest },
-  { path: '/lodash/debounce2', component: DebounceTest2 }
+  { path: '/lodash/debounce2', component: DebounceTest2 },
+  {
+    path: '/404',
+    component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
+  },
+  {
+    path: '*', redirect: '/404', hidden: true
+  }
 ]

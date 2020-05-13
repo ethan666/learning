@@ -37,14 +37,14 @@ export default {
 
     const editColumn = (
       <a-popover {...{ props: { title: '编辑列', trigger: 'click' } }}>
-        <template slot={'content'}>
+        {/* <template slot={'content'}>
           <draggable v-model="columnsAll" group="column" @start="drag=true" @end="drag=false">
             <div v-for="element in columnsAll" :key="element.dataIndex">
               <a-checkbox :defaultChecked="element.checked" @change="onChange(element, $event)">{{ element.title }}</a-checkbox>
             </div>
           </draggable>
         </template>
-        <a-button {...{ props: { class: 'column-select', type: 'primary', icon: 'menu-fold' } }}></a-button>
+        <a-button {...{ props: { class: 'column-select', type: 'primary', icon: 'menu-fold' } }}></a-button> */}
       </a-popover>
     )
 
