@@ -36,7 +36,7 @@ export default {
 
   render (h) {
     const editColumn = (
-      <a-popover {...{ props: { title: '编辑列', trigger: 'click' } }}>
+      <a-popover {...{ props: { title: '编辑列', trigger: 'click', placement: 'bottomRight' } }}>
         <template slot={'content'}>
           <draggable group={'column'} list={this.columns} >
             <transition-group>
