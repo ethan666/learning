@@ -10,7 +10,7 @@ export const asyncRouterMap = [
 ]
 
 export const constantRouterMap = [
-  { path: '/', redirect: '/icon' },
+  { path: '/', redirect: '/table/editable' },
   { path: '/icon', component: IconTest },
   { path: '/asyncRouter', component: AsyncRouter },
   { path: '/table/resize', component: TableResize },

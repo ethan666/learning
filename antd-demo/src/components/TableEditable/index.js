@@ -1,16 +1,26 @@
-import Vue from 'vue'
 import T from 'ant-design-vue/es/table/Table'
 // import draggable from 'vuedraggable/src/vuedraggable'
 import draggable from 'vuedraggable'
 import VueDraggableResizable from 'vue-draggable-resizable'
+import './index.less'
 
 export default {
   name: 'TableEditable',
+  props: T.props,
   data () {
     return {
+
     }
   },
-  props: T.props,
+  computed: {
+    draggingState () {
+      const obj = {}
+      this.columns.forEach(col => {
+        obj[col.key] = col.width
+      })
+      return obj
+    }
+  },
   watch: {
 
   },
@@ -25,14 +35,6 @@ export default {
   },
 
   render (h) {
-    const props = {}
-    const tKeys = Object.keys(T.props)
-    Object.keys(this.$props).forEach(key => {
-      if (tKeys.indexOf(key !== -1)) {
-        props[key] = this.$props[key]
-      }
-    })
-
     const editColumn = (
       <a-popover {...{ props: { title: '编辑列', trigger: 'click' } }}>
         <template slot={'content'}>
@@ -46,23 +48,23 @@ export default {
             </transition-group>
           </draggable>
         </template>
-        <a-button {...{ props: { class: 'column-select', type: 'primary', icon: 'menu-fold' } }}></a-button>
+        <a-button class='column-select' {...{ props: { type: 'primary', icon: 'menu-fold' } }}></a-button>
       </a-popover>
     )
 
-    const _columns = this.columns.filter(item => item.checked)
-    props.columns = _columns
+    const columns = this.columns.filter(item => item.checked)
+    const props = { ...this.$props, columns }
 
-    const draggingMap = {}
-    _columns.forEach(col => {
-      draggingMap[col.key] = col.width
-    })
-    const draggingState = Vue.observable(draggingMap)
+    // const draggingMap = {}
+    // columns.forEach(col => {
+    //   draggingMap[col.key] = col.width
+    // })
+    // const draggingState = Vue.observable(draggingMap)
     const ResizeableTitle = (h1) => {
       const { props, children } = h1
       let thDom = null
       const { key, ...restProps } = props
-      const col = _columns.find(col => {
+      const col = this.columns.find(col => {
         const k = col.dataIndex || col.key
         return k === key
       })
@@ -70,12 +72,12 @@ export default {
         return <th {...restProps}>{children}</th>
       }
       const onDrag = (x, y) => {
-        draggingState[key] = 0
+        this.draggingState[key] = 0
         col.width = Math.max(x, 1)
       }
 
       const onDragstop = () => {
-        draggingState[key] = thDom.getBoundingClientRect().width
+        this.draggingState[key] = thDom.getBoundingClientRect().width
       }
       return (
         <th
@@ -89,7 +91,7 @@ export default {
             key={col.key}
             class="table-draggable-handle"
             w={10}
-            x={draggingState[key] || col.width}
+            x={this.draggingState[key] || col.width}
             z={1}
             axis="x"
             draggable={true}

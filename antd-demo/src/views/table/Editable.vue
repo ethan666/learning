@@ -1,7 +1,7 @@
 <template>
-  <div class="aaa">
+  <div class="editable">
     <table-editable
-      bordered
+      size="small"
       :columns="columns"
       :data-source="data"
       :pagination="pagination"
@@ -55,7 +55,6 @@ const columns = [
     checked: true,
     title: 'Action',
     key: 'action',
-    width: 100,
     scopedSlots: { customRender: 'action' }
   }
 ]
