@@ -2,11 +2,16 @@
   <div class="editable">
     <table-editable
       size="small"
+      bordered
       :columns="columns"
       :data-source="data"
       :pagination="pagination"
       @change="onTableChange"
-    />
+    >
+      <template v-slot:action>
+        <a href="javascript:;">Delete</a>
+      </template>
+    </table-editable>
   </div>
 </template>
 
