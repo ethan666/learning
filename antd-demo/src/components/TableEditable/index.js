@@ -111,7 +111,7 @@ export default {
 
     const tProps = {
       props,
-      scopedSlots: { ...this.$scopedSlots },
+      // scopedSlots: { ...this.$scopedSlots },
       on: (this.$vnode ? this.$vnode.componentOptions.listeners : this.$listeners) || {}
     }
 
