@@ -111,19 +111,16 @@ export default {
 
     const tProps = {
       props,
-      // scopedSlots: { ...this.$scopedSlots },
+      scopedSlots: { ...this.$scopedSlots },
       on: (this.$vnode ? this.$vnode.componentOptions.listeners : this.$listeners) || {}
     }
 
-    const table = (
-      <a-table {...tProps} >
-        { Object.keys(this.$slots).map(name => (<template slot={name}>{this.$slots[name]}</template>)) }
-      </a-table>
-    )
     return (
       <div class="table-editable">
         { editColumn }
-        { table }
+        <a-table {...tProps} >
+          { Object.keys(this.$slots).map(name => (<template slot={name}>{this.$slots[name]}</template>)) }
+        </a-table>
       </div>
     )
   }
