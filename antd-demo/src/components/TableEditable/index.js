@@ -55,15 +55,11 @@ export default {
     const columns = this.columns.filter(item => item.checked)
     const props = { ...this.$props, columns }
 
-    // const draggingMap = {}
-    // columns.forEach(col => {
-    //   draggingMap[col.key] = col.width
-    // })
-    // const draggingState = Vue.observable(draggingMap)
-    const ResizeableTitle = (h1) => {
-      const { props, children } = h1
+    const ResizeableTitle = (...arg) => {
+      const h1 = arg[0]
+      const { children, data } = h1
       let thDom = null
-      const { key, ...restProps } = props
+      const { key, ...restProps } = data
       const col = this.columns.find(col => {
         const k = col.dataIndex || col.key
         return k === key
@@ -111,7 +107,7 @@ export default {
 
     const tProps = {
       props,
-      // scopedSlots: { ...this.$scopedSlots },
+      scopedSlots: { ...this.$scopedSlots },
       on: (this.$vnode ? this.$vnode.componentOptions.listeners : this.$listeners) || {}
     }
 

@@ -8,6 +8,12 @@
       :pagination="pagination"
       @change="onTableChange"
     >
+      <span
+        slot="amount"
+        slot-scope="text"
+      >
+        <a href="javascript:;">{{ text }}</a>
+      </span>
       <template v-slot:action>
         <a href="javascript:;">Delete</a>
       </template>
@@ -31,7 +37,8 @@ const columns = [
     dataIndex: 'amount',
     width: 200,
     defaultSortOrder: 'descend',
-    sorter: (a, b) => a.amount - b.amount
+    sorter: (a, b) => a.amount - b.amount,
+    scopedSlots: { customRender: 'amount' }
   },
   {
     checked: true,
