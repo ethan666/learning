@@ -9,7 +9,7 @@ export default {
   props: T.props,
   data () {
     return {
-
+      visible: false
     }
   },
   computed: {
@@ -31,12 +31,17 @@ export default {
     VueDraggableResizable
   },
   methods: {
-
+    onVisibleChange (visible) {
+      this.visible = visible
+    }
   },
 
+  // :visible="hovered"
+  // @visibleChange="handleHoverChange"
   render (h) {
+    const { visible } = this
     const editColumn = (
-      <a-popover {...{ props: { title: '编辑列', trigger: 'click', placement: 'bottomRight' } }}>
+      <a-popover {...{ props: { visible, title: '编辑列', trigger: 'click', placement: 'bottomRight' } }} onVisibleChange={this.onVisibleChange}>
         <template slot={'content'}>
           <draggable group={'column'} list={this.columns} >
             <transition-group>
@@ -48,22 +53,18 @@ export default {
             </transition-group>
           </draggable>
         </template>
-        <a-button class='column-select' {...{ props: { type: 'primary', icon: 'menu-fold' } }}></a-button>
+        <a-button class='column-select' {...{ props: { type: 'primary', icon: visible ? 'menu-unfold' : 'menu-fold' } }}></a-button>
       </a-popover>
     )
 
     const columns = this.columns.filter(item => item.checked)
     const props = { ...this.$props, columns }
 
-    // const draggingMap = {}
-    // columns.forEach(col => {
-    //   draggingMap[col.key] = col.width
-    // })
-    // const draggingState = Vue.observable(draggingMap)
-    const ResizeableTitle = (h1) => {
-      const { props, children } = h1
+    const ResizeableTitle = (...arg) => {
+      const h1 = arg[0]
+      const { children, data } = h1
       let thDom = null
-      const { key, ...restProps } = props
+      const { key, ...restProps } = data
       const col = this.columns.find(col => {
         const k = col.dataIndex || col.key
         return k === key
