@@ -36,8 +36,6 @@ export default {
     }
   },
 
-  // :visible="hovered"
-  // @visibleChange="handleHoverChange"
   render (h) {
     const { visible } = this
     const editColumn = (

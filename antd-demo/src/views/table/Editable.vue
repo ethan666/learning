@@ -8,9 +8,6 @@
       :pagination="pagination"
       @change="onTableChange"
     >
-      <!-- <template v-slot:action>
-        <a href="javascript:;">Delete</a>
-      </template> -->
       <span
         slot="amount"
         slot-scope="text"
