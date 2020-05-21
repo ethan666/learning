@@ -13,8 +13,9 @@ export const constantRouterMap = [
   { path: '/', redirect: '/table/editable' },
   { path: '/icon', component: IconTest },
   { path: '/asyncRouter', component: AsyncRouter },
+  { path: '/form/inline', component: () => import(/* webpackChunkName: "form" */ '@/views/form/Inline') },
   { path: '/table/resize', component: TableResize },
-  { path: '/table/editable', component: () => import(/* webpackChunkName: "fail" */ '@/views/table/Editable') },
+  { path: '/table/editable', component: () => import(/* webpackChunkName: "table" */ '@/views/table/Editable') },
   { path: '/lodash/debounce1', component: DebounceTest },
   { path: '/lodash/debounce2', component: DebounceTest2 },
   {
