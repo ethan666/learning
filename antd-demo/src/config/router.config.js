@@ -15,12 +15,13 @@ console.log(`isProd: ${isProd}`)
 
 export const constantRouterMap = [
   { path: '/', redirect: '/table/editable' },
-  { path: '/icon', component: isProd ? () => import(/* webpackChunkName: "icon" */ '@/views/IconTest') : IconTest },
-  { path: '/asyncRouter', component: isProd ? () => import(/* webpackChunkName: "router" */ '@/views/AsyncRouter') : AsyncRouter },
-  { path: '/table/resize', component: isProd ? () => import(/* webpackChunkName: "table" */ '@/views/table/Resize') : TableResize },
-  { path: '/table/editable', component: isProd ? () => import(/* webpackChunkName: "table" */ '@/views/table/Editable') : Editable },
-  { path: '/lodash/debounce1', component: isProd ? () => import(/* webpackChunkName: "lodash" */ '@/views/lodash/DebounceTest') : DebounceTest },
-  { path: '/lodash/debounce2', component: isProd ? () => import(/* webpackChunkName: "lodash" */ '@/views/lodash/DebounceTest2') : DebounceTest2 },
+  { path: '/icon', component: IconTest },
+  { path: '/asyncRouter', component: AsyncRouter },
+  { path: '/form/inline', component: () => import(/* webpackChunkName: "form" */ '@/views/form/Inline') },
+  { path: '/table/resize', component: TableResize },
+  { path: '/table/editable', component: () => import(/* webpackChunkName: "table" */ '@/views/table/Editable') },
+  { path: '/lodash/debounce1', component: DebounceTest },
+  { path: '/lodash/debounce2', component: DebounceTest2 },
   {
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
