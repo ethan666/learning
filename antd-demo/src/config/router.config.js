@@ -3,11 +3,15 @@ import PromiseTest from '@/views/js/PromiseTest.vue'
 import DebounceTest from '@/views/lodash/DebounceTest.vue'
 import DebounceTest2 from '@/views/lodash/DebounceTest2.vue'
 import TableResize from '@/views/table/Resize.vue'
+import Editable from '@/views/table/Editable.vue'
 import AsyncRouter from '@/views/AsyncRouter.vue'
 
 export const asyncRouterMap = [
   { path: '/promise', component: PromiseTest }
 ]
+
+const isProd = process.env.NODE_ENV === 'production'
+console.log(`isProd: ${isProd}`)
 
 export const constantRouterMap = [
   { path: '/', redirect: '/table/editable' },

@@ -15,7 +15,7 @@
         <a href="javascript:;">{{ text }}</a>
       </span>
       <span slot="action">
-        <a href="javascript:;">Delete</a>
+        <a href="javascript:;">Deleteaav  vv</a>
       </span>
     </table-editable>
   </div>
