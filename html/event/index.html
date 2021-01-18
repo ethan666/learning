@@ -31,6 +31,11 @@
         background: #0ff;
         left: 40px;
       }
+      .box2{
+        width: 100px;
+        height: 100px;
+        background-color: #f00;
+      }
     </style>
   </head>
 
@@ -43,12 +48,14 @@
     <div
       class="containor"
       onclick="onClickBox(event)"
-      onmouseover="onMouseoverBox(event)"
+      onmouseover='onMouseoverBox(event)'
       onmouseout="onMouseoutBox(event)"
     >
       <div class="child index1"></div>
       <div class="child index2"></div>
     </div>
+
+    <div class="box2"></div>
     <script>
       function onClick() {
         console.log("click");
@@ -68,6 +75,19 @@
         }
         console.log("mouseout");
       }
+      const box2 = document.getElementsByClassName('box2')[0]
+      box2.onClick = () => {
+        console.log('click1')
+      }
+      box2.onClick = () => {
+        console.log('click2')
+      }
+
+      window.addEventListener('beforeunload', (event)=>{
+        console.log(event)
+        event.preventDefault();
+        event.returnValue = '';
+      })
     </script>
   </body>
 </html>
