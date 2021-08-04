@@ -16,3 +16,7 @@ window.onload = function(){
 
   bodyNode.appendChild(newEle)
 }
+
+// https://segmentfault.com/a/1190000003936301
+// 帮忙填坑：在目前的 HTML 标准下， innerText 会把 \n 替换为 <br>；对于 <textarea>和 <pre> 如果设置为 display：none 的时候会出现这种状态。请使用时务必注意，对于新浏览器来说， 建议使用 textContent 进行操作。
+// 参考文章：https://my.oschina.net/dyhunt...
