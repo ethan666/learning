@@ -6,6 +6,7 @@
 
 - 为什么不报警
 - 自动修复怎么开启
+- vetur 怎么配置
 
 ## Project setup
 
