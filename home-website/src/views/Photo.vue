@@ -5,18 +5,13 @@
       src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
       :width="200"
     />
-    <!-- <a-button type='primary'>nihoa</a-button> -->
+    <!-- <a-button type="primary">nihoa</a-button> -->
   </div>
 </template>
 
 <script>
-// import Vue from 'vue';
-// import { Image } from 'ant-design-vue';
-
-// Vue.use(Image);
-
 export default {
-  name: "Photo",
+  name: "Ph oto",
   data() {
     return {
       title: "家庭相册",
