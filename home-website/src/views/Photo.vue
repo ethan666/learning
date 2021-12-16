@@ -11,7 +11,8 @@
 
 <script>
 export default {
-  name: "Ph oto",
+  name: "Photo",
+
   data() {
     return {
       title: "家庭相册",

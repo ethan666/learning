@@ -5,4 +5,9 @@ import router from "./router";
 import store from "./store";
 import { Button, Image } from "ant-design-vue";
 
-createApp(App).use(store).use(router).use(Button).use(Image).mount("#app");
+const app = createApp(App);
+app.use(store);
+app.use(router);
+app.use(Button).use(Image);
+
+app.mount("#app");

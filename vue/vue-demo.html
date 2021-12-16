@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=800px, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue test</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input v-model="msg" @input="onInput" @change="onChange">
+    <p><span>msg:</span>{{msg}}</p>
+  </div>
+ 
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'Hello'
+      },
+      methods: {
+        onInput(){
+          console.log('input')
+        },
+        onChange(){
+          console.log('change')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
