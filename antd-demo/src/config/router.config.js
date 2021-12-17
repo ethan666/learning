@@ -22,6 +22,7 @@ export const constantRouterMap = [
   { path: '/table/editable', component: () => import(/* webpackChunkName: "table" */ '@/views/table/Editable') },
   { path: '/lodash/debounce1', component: DebounceTest },
   { path: '/lodash/debounce2', component: DebounceTest2 },
+  { path: '/render/tt1', component: () => import(/* webpackChunkName: "table" */ '@/views/render/Tt') },
   {
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>margin垂直方向塌陷问题</title>
+    <style>
+      .box1 {
+        width: 200px;
+        height: 100px;
+        background: #888;
+        margin-bottom: 10px;
+        border: 1px solid transparent;
+        overflow: hidden;
+        padding: 10px;
+        position: fixed;
+        display: table;
+      }
+
+      .box3{
+        width: 200px;
+        height: 100px;
+        background: #f00;
+        margin-top: 20px;
+      }
+      .box2 {
+        width: 100px;
+        height: 50px;
+        background: rgba(0, 255, 0, 0.4);
+        margin-top: 20px;
+      }
+
+      /* .box1:before{
+        content: '';
+        overflow: hidden;
+        display: block;
+      } */
+
+    </style>
+  </head>
+
+  <body>
+    <div class="box1">
+      <div class="box2">
+      </div>
+    </div>
+    <div class="box3"></div>
+  </body>
+</html>
