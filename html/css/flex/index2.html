@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex 嵌套</title>
+    <style>
+        div {
+            box-sizing: border-box;
+        }
+        .flex {
+            display: flex;
+            flex-direction: column;
+        }
+        .area {
+            padding: 10px;
+            height: 300px;
+            width: 300px;
+            background-color: #3fb9ab;
+            color: #fff;
+        }
+        .item {
+            padding: 10px;
+            flex: 1;
+            background-color: #158c7e;
+        }
+        .nest-item {
+            flex: 1;
+            overflow: auto;
+            background-color: #046b5f;
+        }
+        .content {
+            padding: 10px;
+            height: 600px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="area flex">
+        area
+        <div class="item flex">
+            item
+            <div class="nest-item">
+                <div class="content">content</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

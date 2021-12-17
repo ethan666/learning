@@ -14,10 +14,33 @@ promise.then(
         const {status, a} = res
         console.log(`status:${status}, a:${a}`)
     },
-    res => {
-        const {status, a} = res
-        console.log(`status:${status}, a:${a}`)
-    }
-)
+    // res => {
+    //     const {status, a} = res
+    //     console.log(`status:${status}, a:${a}`)
+    // }
+).catch(err => console.log(`err: ${err}`))
 
 Promise.reject('fail').then(res => {console.log(`resolve:${res}`)},res => {console.log(`reject:${res}`)})
+
+function getProjectId (){
+    return new Promise(function(resolve, reject){
+        setTimeout(()=>{
+            resolve(100)
+        }, 1000)
+        setTimeout(()=>{
+            resolve(0)
+        }, 50)
+    })
+}
+
+async function aaa(){
+    const res = await getProjectId()
+    console.log(res)
+}
+
+// aaa()
+
+
+
+
+
