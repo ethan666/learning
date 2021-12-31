@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 文件描述
+ * @version: 1.0
+ * @Author: 谭义洋
+ * @Date: 2019-12-23 11:03:34
+ * @LastEditors: 谭义洋
+ * @LastEditTime: 2021-12-18 09:30:08
+-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,33 +55,56 @@
 
     <div
       class="containor"
-      onclick="onClickBox(event)"
-      onmouseover='onMouseoverBox(event)'
-      onmouseout="onMouseoutBox(event)"
     >
-      <div class="child index1"></div>
+      <div 
+        class="child index1" 
+      ></div>
       <div class="child index2"></div>
     </div>
 
     <div class="box2"></div>
     <script>
-      function onClick() {
+      var container = document.getElementsByClassName('containor')[0]
+      var child1 = document.getElementsByClassName('index1')[0]
+
+      container.addEventListener('mousedown', onMousedown, { capture: true })
+      container.addEventListener('mousedown', onMousedown1)
+      child1.addEventListener('mousedown', onMousedownChild, true)
+      child1.addEventListener('mousedown', onMousedownChild1)
+      
+
+      function onClick(event) {
         console.log("click");
       }
-      function onClickBox(event) {
-        console.log(event);
+      function onMousedown(event) {
+        console.log("mousedown container useCapture");
+        event.stopPropagation()
+      }
+      function onMousedown1(event) {
+        console.log("mousedown container");
+      }
+      function onMousedownChild(event){
+        console.log("mousedown child1 useCapture");
+      }
+      function onMousedownChild1(event){
+        console.log("mousedown child1");
+      }
+
+      function onMouseupChild(event){
+        console.log("mouseup child1");
+        // event.stopPropagation()
       }
       function onMouseoverBox(event) {
-        if (event.currentTarget.contains(event.relatedTarget)) {
-          return;
-        }
-        console.log("mouseover");
+        // if (event.currentTarget.contains(event.relatedTarget)) {
+        //   return;
+        // }
+        // console.log("mouseover");
       }
       function onMouseoutBox(event) {
-        if (event.currentTarget.contains(event.relatedTarget)) {
-          return;
-        }
-        console.log("mouseout");
+        // if (event.currentTarget.contains(event.relatedTarget)) {
+        //   return;
+        // }
+        // console.log("mouseout");
       }
       const box2 = document.getElementsByClassName('box2')[0]
       box2.onClick = () => {
@@ -83,11 +114,11 @@
         console.log('click2')
       }
 
-      window.addEventListener('beforeunload', (event)=>{
-        console.log(event)
-        event.preventDefault();
-        event.returnValue = '';
-      })
+      // window.addEventListener('beforeunload', (event)=>{
+      //   console.log(event)
+      //   event.preventDefault();
+      //   event.returnValue = 'dsafasdf';
+      // })
     </script>
   </body>
 </html>
