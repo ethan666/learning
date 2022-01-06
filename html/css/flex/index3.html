@@ -1,0 +1,57 @@
+<!--
+ * @Descripttion: flex设置子元素独占一行，或者等分.
+ * 怎么解决最后一行下边距问题。last-child不好实现。 
+ * @version: 1.0
+ * @Author: 谭义洋
+ * @Date: 2022-01-06 11:31:43
+ * @LastEditors: 谭义洋
+ * @LastEditTime: 2022-01-06 11:46:02
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex test</title>
+    <style>
+        .box {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .child{
+            border: 1px solid red;
+            background-color: green;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        .box .line{
+            flex: 1 1 100%;
+        }
+        .box .col{
+            flex: 1 1;
+        }
+        .col+.col{
+            margin-left: 10px;
+        }
+        .child:last-child{
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="line child"></div>
+        <div class="col child"></div>
+        <div class="col child"></div>
+        <div class="col child"></div>
+        <div class="line child"></div>
+        <div class="col child"></div>
+        <div class="col child"></div>
+        
+    </div>
+</body>
+
+</html>
