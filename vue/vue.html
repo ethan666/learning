@@ -24,6 +24,7 @@
   <div id="example">
     <p>Original message: "{{ message }}"</p>
     <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    <!-- <p>computed test:{{ct}}</p> -->
   </div>
   <div id="app-2">
     <span v-bind:title="message">
@@ -80,6 +81,11 @@
         reversedMessage: function () {
           // `this` 指向 vm 实例
           return this.message.split('').reverse().join('')
+        },
+        ct(){
+          debugger
+          this.message;
+          return this.message + 'ct'
         }
       }
     })
