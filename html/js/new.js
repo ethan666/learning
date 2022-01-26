@@ -4,7 +4,7 @@
  * @Author: 谭义洋
  * @Date: 2022-01-25 14:40:07
  * @LastEditors: 谭义洋
- * @LastEditTime: 2022-01-25 15:50:12
+ * @LastEditTime: 2022-01-25 16:10:45
  */
 
 // 模拟new关键字实现，第一个参数构造函数，其他参数为构造函数参数
@@ -21,3 +21,5 @@ function Person(name, age) {
   this.name = name;
   this.age = age;
 }
+
+console.log(new Person("xiaoming", 18));
