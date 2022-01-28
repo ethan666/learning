@@ -5,14 +5,31 @@
  * @Author: 谭义洋
  * @Date: 2022-01-26 18:12:49
  * @LastEditors: 谭义洋
- * @LastEditTime: 2022-01-27 17:04:25
+ * @LastEditTime: 2022-01-28 17:53:32
  */
 
 const Koa = require("koa");
-const app = new Koa();
+const Router = require("koa-router");
+const koaBody = require("koa-body");
+const md5 = require("md5");
+const bodyParser=require('koa-bodyparser'),
+const DB=require('./mongoDB.js');
+let app = new Koa();
+// post提交允许上传文件
+app.use(bodyParser());
 
-app.use(async (ctx) => {
-  ctx.body = "Hello World!!!";
+let router = new Router();
+
+// 查找学员
+router.get('/list',async (ctx)=>{
+  var result=await DB.find('user',{});
+  await ctx.render('student',{
+      list:result
+  });
+})
+
+
+app.use(router.routes()).use(router.allowedMethods());
+app.listen(3000, () => {
+  console.log("服务器在3000端口启动");
 });
-
-app.listen(3001);
