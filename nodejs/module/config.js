@@ -1,5 +1,5 @@
 const dbInfo = {
-    dbUrl: 'mongodb://localhost:27017/',
-    dbName: 'mydb'
+  dbUrl: "mongodb://127.0.0.1:27017/",
+  dbName: "mydb",
 };
 module.exports = dbInfo;
