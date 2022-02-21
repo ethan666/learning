@@ -4,7 +4,7 @@
  * @Author: 谭义洋
  * @Date: 2022-01-25 18:11:49
  * @LastEditors: 谭义洋
- * @LastEditTime: 2022-01-26 09:08:19
+ * @LastEditTime: 2022-02-15 17:42:56
  */
 
 // const response = await ajax("/xxx").catch(handleError)
@@ -28,7 +28,7 @@ function pt() {
 
 const handleError = (err) => {
   console.log("handleError", err);
-  return Promise.resolve(err);
+  return Promise.reject(err);
 };
 
 async function test() {
@@ -39,6 +39,13 @@ async function test() {
 /* 另一种方案 */
 //https://www.cnblogs.com/chrissong/p/10841760.html
 //https://blog.grossman.io/how-to-write-async-await-without-try-catch-blocks-in-javascript/
+function to(promise) {
+  return promise.then(data => {
+     return [null, data];
+  })
+  .catch(err => [err]);
+}
+
 function taskPromise(status) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {

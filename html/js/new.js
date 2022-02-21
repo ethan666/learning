@@ -4,7 +4,7 @@
  * @Author: 谭义洋
  * @Date: 2022-01-25 14:40:07
  * @LastEditors: 谭义洋
- * @LastEditTime: 2022-01-25 16:10:45
+ * @LastEditTime: 2022-02-16 14:11:48
  */
 
 // 模拟new关键字实现，第一个参数构造函数，其他参数为构造函数参数
@@ -20,6 +20,19 @@ function _new() {
 function Person(name, age) {
   this.name = name;
   this.age = age;
+  return '3234'
 }
 
 console.log(new Person("xiaoming", 18));
+var pp = _new(Person, 'xh', 16)
+
+function objectFactory(){
+  const args = [...arguments]
+  const fn = args.shift()
+  const context = Object.create(fn.prototype)
+  const obj = fn.apply(context, args);
+
+  return typeof obj === "object" && obj !== null ? obj : context;
+}
+
+
