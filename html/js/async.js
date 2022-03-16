@@ -4,7 +4,7 @@
  * @Author: 谭义洋
  * @Date: 2022-01-25 18:11:49
  * @LastEditors: 谭义洋
- * @LastEditTime: 2022-02-15 17:42:56
+ * @LastEditTime: 2022-03-15 10:41:37
  */
 
 // const response = await ajax("/xxx").catch(handleError)
@@ -17,9 +17,9 @@ async function hello() {
 
 function pt() {
   return new Promise((resolve, reject) => {
-    //   resolve('success')
     setTimeout(() => {
-      reject("erro");
+      // reject("erro");
+      resolve('success')
     }, 1000);
   });
 }
@@ -28,7 +28,8 @@ function pt() {
 
 const handleError = (err) => {
   console.log("handleError", err);
-  return Promise.reject(err);
+  // return Promise.reject(err);
+  return err;
 };
 
 async function test() {

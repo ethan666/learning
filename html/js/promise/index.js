@@ -4,7 +4,7 @@
  * @Author: 谭义洋
  * @Date: 2020-04-28 14:03:23
  * @LastEditors: 谭义洋
- * @LastEditTime: 2022-01-26 10:03:42
+ * @LastEditTime: 2022-03-14 12:00:29
  */
 const promise = new Promise(function (resolve, reject) {
   setTimeout(() => {
@@ -56,3 +56,23 @@ async function aaa() {
 }
 
 // aaa()
+
+
+function abc(isResolved = true){
+  return new Promise(function (resolve, reject) {
+    setTimeout(() => {
+      if(isResolved){
+        resolve('ok')
+      }else{
+        reject('fail')
+      }
+    }, 1000)
+  })
+}
+
+async function test(){
+  const res = await abc()
+  console.log(`res: ${res}`)
+  const bb = await abc(false)
+  console.log(`bb: ${bb}`)
+}
