@@ -2,8 +2,8 @@ const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const canvasCtx = canvasElement.getContext("2d");
 
-const list = [];
-const checkLen = 10;
+// const list = [];
+// const checkLen = 10;
 let index = 0;
 // 检测频率，每秒30下。
 function onResults(results) {
@@ -47,7 +47,9 @@ function onResults(results) {
   //   list.length = 0;
   // }
 
-  checkDirection(results);
+  if(index % 2 === 0){
+    checkDirection(results);
+  }
 
   canvasCtx.save();
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -92,36 +94,6 @@ const camera = new Camera(videoElement, {
 });
 camera.start();
 
-// 3. FEATURE - Slide left / right
-// if (frameCounter->Get() % 2 == 0) // each odd Frame is skipped. For a better result.
-// {
-//     NormalizedLandmark wrist = landmarkList.landmark(0);
-//     NormalizedLandmark MCP_of_second_finger = landmarkList.landmark(9);
-
-//     // angle between the hand (wirst and MCP) and the x-axis.
-//     const float ang_in_radian = this->getAngleABC(MCP_of_second_finger.x(), MCP_of_second_finger.y(), wrist.x(), wrist.y(), wrist.x() + 0.1, wrist.y());
-//     const int ang_in_degree = this->radianToDegree(ang_in_radian);
-//     // LOG(INFO) << "Angle: " << ang_in_degree;
-//     if (this->previous_angle)
-//     {
-//         const float angleDifferenceTreshold = 12;
-//         if (this->previous_angle >= 80 && this->previous_angle <= 100)
-//         {
-//             if (ang_in_degree > this->previous_angle + angleDifferenceTreshold)
-//             {
-//                 recognized_hand_mouvement_sliding = new std::string("Slide left");
-//                 LOG(INFO) << *recognized_hand_mouvement_sliding;
-//             }
-//             else if (ang_in_degree < this->previous_angle - angleDifferenceTreshold)
-//             {
-//                 recognized_hand_mouvement_sliding = new std::string("Slide right");
-//                 LOG(INFO) << *recognized_hand_mouvement_sliding;
-//             }
-//         }
-//     }
-//     this->previous_angle = ang_in_degree;
-// }
-
 let previous_angle = null;
 function checkDirection(results) {
   const landmark = results.multiHandLandmarks[0];
@@ -142,15 +114,15 @@ function checkDirection(results) {
   );
 
   const ang_in_degree = radianToDegree(ang_in_radian);
-  console.log(`Angle:${ang_in_degree}`);
+  // console.log(`Angle:${ang_in_degree}`);
 
   if (previous_angle) {
     const angleDifferenceTreshold = 12;
     if (previous_angle >= 80 && previous_angle <= 100) {
       if (ang_in_degree > previous_angle + angleDifferenceTreshold) {
-        console.log("Slide left");
+        appendOutput(`${moment().format('HH:mm:ss')} 向右`)
       } else if (ang_in_degree < previous_angle - angleDifferenceTreshold) {
-        console.log("Slide right");
+        appendOutput(`${moment().format('HH:mm:ss')} 向左`)
       }
     }
   }
@@ -172,5 +144,13 @@ function getAngleABC(a_x, a_y, b_x, b_y, c_x, c_y) {
 }
 
 function radianToDegree(radian) {
-  return Math.parseInt((radian * 180) / Math.PI + 0.5);
+  return Number.parseInt((radian * 180) / Math.PI + 0.5);
+}
+
+
+function appendOutput(text){
+  const output = document.getElementsByClassName("output")[0]
+  const tc = document.createTextNode(`${text}`)
+  output.appendChild(tc)
+  output.appendChild(document.createElement('br'))
 }

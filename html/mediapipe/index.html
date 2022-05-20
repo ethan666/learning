@@ -18,15 +18,31 @@
       
     ></script>
     <script
-      src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.min.js"
+      src="https://unpkg.com/moment@2.29.3/moment.js"
       crossorigin="anonymous"
     ></script>
+    <style type="text/css">
+      .output{
+        float: right;
+        margin-right: 8px;
+        border: 1px solid #f00;
+        width: 110px;
+        min-height: 60px;
+        max-height: 700px;
+        font-size: 14px;
+        overflow-y: auto;
+      }
+      .output_canvas{
+        transform: scaleX(-1);
+      }
+    </style>
   </head>
 
   <body>
     <div class="container">
-      <video class="input_video"></video>
+      <video class="input_video" style="display: none;"></video>
       <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+      <p class="output"></p>
     </div>
     <script src="./demo.js"></script>
   </body>
