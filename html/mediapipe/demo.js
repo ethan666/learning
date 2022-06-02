@@ -47,7 +47,7 @@ function onResults(results) {
   //   list.length = 0;
   // }
 
-  if(index % 2 === 0){
+  if (index % 2 === 0) {
     checkDirection(results);
   }
 
@@ -120,9 +120,9 @@ function checkDirection(results) {
     const angleDifferenceTreshold = 12;
     if (previous_angle >= 80 && previous_angle <= 100) {
       if (ang_in_degree > previous_angle + angleDifferenceTreshold) {
-        appendOutput(`${moment().format('HH:mm:ss')} 向右`)
+        appendOutput(`${moment().format("HH:mm:ss")} 向右`);
       } else if (ang_in_degree < previous_angle - angleDifferenceTreshold) {
-        appendOutput(`${moment().format('HH:mm:ss')} 向左`)
+        appendOutput(`${moment().format("HH:mm:ss")} 向左`);
       }
     }
   }
@@ -147,10 +147,48 @@ function radianToDegree(radian) {
   return Number.parseInt((radian * 180) / Math.PI + 0.5);
 }
 
-
-function appendOutput(text){
-  const output = document.getElementsByClassName("output")[0]
-  const tc = document.createTextNode(`${text}`)
-  output.appendChild(tc)
-  output.appendChild(document.createElement('br'))
+function appendOutput(text) {
+  const output = document.getElementsByClassName("output")[0];
+  const tc = document.createTextNode(`${text}`);
+  output.appendChild(tc);
+  output.appendChild(document.createElement("br"));
 }
+
+let previous_rectangle_height = null;
+let height;
+function checkZoom() {
+  const landmark = results.multiHandLandmarks[0];
+  const min = Math.min();
+  height = rect;
+  if (previous_rectangle_height) {
+    const heightDifferenceFactor = 0.03;
+
+    // the height is normed [0.0, 1.0] to the camera window height.
+    // so the mouvement (when the hand is near the camera) should be equivalent to the mouvement when the hand is far.
+    const heightDifferenceThreshold = height * heightDifferenceFactor;
+    if (height < previous_rectangle_height - heightDifferenceThreshold) {
+      // recognized_hand_mouvement_zooming = new std::string("Zoom out");
+    } else if (height > previous_rectangle_height + heightDifferenceThreshold) {
+      // recognized_hand_mouvement_zooming = new std::string("Zoom in");
+    }
+  }
+  previous_rectangle_height = height;
+}
+
+// if (this->previous_rectangle_height)
+//         {
+//             const float heightDifferenceFactor = 0.03;
+
+//             // the height is normed [0.0, 1.0] to the camera window height.
+//             // so the mouvement (when the hand is near the camera) should be equivalent to the mouvement when the hand is far.
+//             const float heightDifferenceThreshold = height * heightDifferenceFactor;
+//             if (height < this->previous_rectangle_height - heightDifferenceThreshold)
+//             {
+//                 recognized_hand_mouvement_zooming = new std::string("Zoom out");
+//             }
+//             else if (height > this->previous_rectangle_height + heightDifferenceThreshold)
+//             {
+//                 recognized_hand_mouvement_zooming = new std::string("Zoom in");
+//             }
+//         }
+//         this->previous_rectangle_height = height;
