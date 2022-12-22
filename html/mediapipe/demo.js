@@ -95,7 +95,7 @@ function onResults(results) {
   //   list.length = 0;
   // }
 
-  if(directionCheck && index % 2 === 0){
+  if (index % 2 === 0) {
     checkDirection(results);
   }
 
@@ -176,9 +176,9 @@ function checkDirection(results) {
     const angleDifferenceTreshold = 12;
     if (previous_angle >= 80 && previous_angle <= 100) {
       if (ang_in_degree > previous_angle + angleDifferenceTreshold) {
-        appendOutput(`${moment().format('HH:mm:ss')} 向右`)
+        appendOutput(`${moment().format("HH:mm:ss")} 向右`);
       } else if (ang_in_degree < previous_angle - angleDifferenceTreshold) {
-        appendOutput(`${moment().format('HH:mm:ss')} 向左`)
+        appendOutput(`${moment().format("HH:mm:ss")} 向左`);
       }
     }
   }
