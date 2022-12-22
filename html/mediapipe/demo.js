@@ -2,6 +2,54 @@ const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const canvasCtx = canvasElement.getContext("2d");
 
+const directionBtn = document.getElementById('direction_btn')
+const panBtn = document.getElementById('pan_btn')
+const zoomBtn = document.getElementById('zoom_btn')
+
+let directionCheck = false
+directionBtn.addEventListener("click", () => {
+  directionCheck = !directionCheck
+  let text = ''
+  if(directionCheck){
+    text = '左右检测(取消)'
+  }else{
+    text = '左右检测'
+  }
+  
+  directionBtn.removeChild(directionBtn.firstChild)
+  directionBtn.appendChild(document.createTextNode(text))
+})
+
+let panCheck = false
+panBtn.addEventListener('click', () => {
+  panCheck = !panCheck
+
+  let text = ''
+  if(panCheck){
+    text = '平移检测(取消)'
+  }else{
+    text = '平移检测'
+  }
+
+  panBtn.removeChild(panBtn.firstChild)
+  panBtn.appendChild(document.createTextNode(text))
+})
+
+let zoomCheck = false
+zoomBtn.addEventListener('click', () => {
+  zoomCheck = !zoomCheck
+
+  let text = ''
+  if(zoomCheck){
+    text = '缩放检测(取消)'
+  }else{
+    text = '缩放检测'
+  }
+
+  zoomBtn.removeChild(zoomBtn.firstChild)
+  zoomBtn.appendChild(document.createTextNode(text))
+})
+
 // const list = [];
 // const checkLen = 10;
 let index = 0;
@@ -13,10 +61,10 @@ function onResults(results) {
   // if (results.multiHandLandmarks[0]?.length === 21) {
   //   const point = results.multiHandLandmarks[0][8];
   //   list.push(point.x);
-
-  //   const temp = [];
-  //   for (let i = 0, len = list.length; i < len; i++) {
   //     if (i > 0) {
+    
+      //   const temp = [];
+      //   for (let i = 0, len = list.length; i < len; i++) {
   //       const direction = list[i] - list[i - 1] > 0;
   //       let num;
   //       if (
@@ -51,6 +99,14 @@ function onResults(results) {
     checkDirection(results);
   }
 
+  if(zoomCheck){
+    checkZoom(results);
+  }
+
+  if(panCheck){
+    checkScrolling(results)
+  }
+
   canvasCtx.save();
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
   canvasCtx.drawImage(
@@ -80,7 +136,7 @@ const hands = new Hands({
 hands.setOptions({
   maxNumHands: 2,
   modelComplexity: 1,
-  minDetectionConfidence: 0.5,
+  minDetectionConfidence: 0.8,
   minTrackingConfidence: 0.5,
 });
 hands.onResults(onResults);
@@ -130,6 +186,93 @@ function checkDirection(results) {
   previous_angle = ang_in_degree;
 }
 
+// 检测放大、缩小
+let previous_rectangle_height = null
+function checkZoom(results){
+  const landmark = results.multiHandLandmarks[0]; 
+  if (landmark?.length !== 21) {
+    return;
+  }
+
+  const yArr = landmark.map(item => item.y)
+  const maxY = Math.max(...yArr);
+  const minY = Math.min(...yArr)
+  const height = maxY - minY
+
+  if(previous_rectangle_height){
+    const heightDifferenceFactor = 0.03;
+
+    const heightDifferenceThreshold = height * heightDifferenceFactor;
+    if (height < previous_rectangle_height - heightDifferenceThreshold)
+    {
+      appendOutput(`${moment().format('HH:mm:ss')} 缩小`)
+    }
+    else if (height > previous_rectangle_height + heightDifferenceThreshold)
+    {
+      appendOutput(`${moment().format('HH:mm:ss')} 放大`)
+    }
+  }
+  previous_rectangle_height = height;
+
+}
+
+let previous_x_center = null
+let previous_y_center = null
+function checkScrolling(results){
+  const landmark = results.multiHandLandmarks[0]; 
+
+  if (landmark?.length !== 21) {
+    return;
+  }
+
+  const yArr = landmark.map(item => item.y)
+  const maxY = Math.max(...yArr);
+  const minY = Math.min(...yArr)
+  const height = maxY - minY
+
+  const x_center = landmark[9].x
+  const y_center = landmark[9].y
+  if (previous_x_center)
+  {
+      const mouvementDistance = get_Euclidean_DistanceAB(x_center, y_center, previous_x_center, previous_y_center);
+      // LOG(INFO) << "Distance: " << mouvementDistance;
+
+      const mouvementDistanceFactor = 0.02; // only large mouvements will be recognized.
+
+      // the height is normed [0.0, 1.0] to the camera window height. 
+      // so the mouvement (when the hand is near the camera) should be equivalent to the mouvement when the hand is far.
+      const mouvementDistanceThreshold = mouvementDistanceFactor * height;
+      if (mouvementDistance > mouvementDistanceThreshold)
+      {
+          const angle = radianToDegree(getAngleABC(x_center, y_center, previous_x_center, previous_y_center, previous_x_center + 0.1, previous_y_center));
+          // LOG(INFO) << "Angle: " << angle;
+          if (angle >= -45 && angle < 45)
+          {
+            // recognized_hand_mouvement_scrolling = new std::string("Scrolling right");
+            appendOutput(`${moment().format('HH:mm:ss')} right`)
+          }
+          else if (angle >= 45 && angle < 135)
+          {
+            // recognized_hand_mouvement_scrolling = new std::string("Scrolling up");
+            appendOutput(`${moment().format('HH:mm:ss')} up`)
+          }
+          else if (angle >= 135 || angle < -135)
+          {
+            // recognized_hand_mouvement_scrolling = new std::string("Scrolling left");
+            appendOutput(`${moment().format('HH:mm:ss')} left`)
+          }
+          else if (angle >= -135 && angle < -45)
+          {
+            appendOutput(`${moment().format('HH:mm:ss')} down`)
+            // recognized_hand_mouvement_scrolling = new std::string("Scrolling down");
+          }
+      }
+  }
+  previous_x_center = x_center;
+  previous_y_center = y_center;
+}
+
+
 function getAngleABC(a_x, a_y, b_x, b_y, c_x, c_y) {
   const ab_x = b_x - a_x;
   const ab_y = b_y - a_y;
@@ -147,48 +290,25 @@ function radianToDegree(radian) {
   return Number.parseInt((radian * 180) / Math.PI + 0.5);
 }
 
-function appendOutput(text) {
-  const output = document.getElementsByClassName("output")[0];
-  const tc = document.createTextNode(`${text}`);
-  output.appendChild(tc);
-  output.appendChild(document.createElement("br"));
+function get_Euclidean_DistanceAB(a_x, a_y, b_x, b_y){
+  const dist = Math.pow(a_x - b_x, 2) + Math.pow(a_y - b_y, 2)
+  return Math.sqrt(dist)
 }
 
-let previous_rectangle_height = null;
-let height;
-function checkZoom() {
-  const landmark = results.multiHandLandmarks[0];
-  const min = Math.min();
-  height = rect;
-  if (previous_rectangle_height) {
-    const heightDifferenceFactor = 0.03;
+function appendOutput(text){
+  const output = document.getElementsByClassName("output")[0]
+  const tc = document.createTextNode(`${text}`)
+  output.appendChild(tc)
+  output.appendChild(document.createElement('br'))
+}
 
-    // the height is normed [0.0, 1.0] to the camera window height.
-    // so the mouvement (when the hand is near the camera) should be equivalent to the mouvement when the hand is far.
-    const heightDifferenceThreshold = height * heightDifferenceFactor;
-    if (height < previous_rectangle_height - heightDifferenceThreshold) {
-      // recognized_hand_mouvement_zooming = new std::string("Zoom out");
-    } else if (height > previous_rectangle_height + heightDifferenceThreshold) {
-      // recognized_hand_mouvement_zooming = new std::string("Zoom in");
-    }
+const clearBtn = document.getElementById('clear_btn')
+clearBtn.addEventListener('click', clearOutput)
+
+function clearOutput(){
+  const output = document.getElementsByClassName("output")[0]
+  while (output.firstChild) {
+    output.removeChild(output.firstChild);
   }
-  previous_rectangle_height = height;
 }
 
-// if (this->previous_rectangle_height)
-//         {
-//             const float heightDifferenceFactor = 0.03;
-
-//             // the height is normed [0.0, 1.0] to the camera window height.
-//             // so the mouvement (when the hand is near the camera) should be equivalent to the mouvement when the hand is far.
-//             const float heightDifferenceThreshold = height * heightDifferenceFactor;
-//             if (height < this->previous_rectangle_height - heightDifferenceThreshold)
-//             {
-//                 recognized_hand_mouvement_zooming = new std::string("Zoom out");
-//             }
-//             else if (height > this->previous_rectangle_height + heightDifferenceThreshold)
-//             {
-//                 recognized_hand_mouvement_zooming = new std::string("Zoom in");
-//             }
-//         }
-//         this->previous_rectangle_height = height;

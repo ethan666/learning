@@ -6,38 +6,38 @@
  * @LastEditors: 谭义洋
  * @LastEditTime: 2022-03-14 12:00:29
  */
-const promise = new Promise(function (resolve, reject) {
-  setTimeout(() => {
-    var a = 0;
-    if (a > 1) {
-      resolve({ status: "success", a });
-    } else {
-      reject({ status: "fail", a });
-    }
-  }, 1000);
-});
+// const promise = new Promise(function (resolve, reject) {
+//   setTimeout(() => {
+//     var a = 0;
+//     if (a > 1) {
+//       resolve({ status: "success", a });
+//     } else {
+//       reject({ status: "fail", a });
+//     }
+//   }, 1000);
+// });
 
-promise
-  .then(
-    (res) => {
-      const { status, a } = res;
-      console.log(`status:${status}, a:${a}`);
-    },
-    (res) => {
-      const { status, a } = res;
-      console.log(`status:${status}, a:${a}`);
-    }
-  )
-  .catch((err) => console.log(`err: ${err}`));
+// promise
+//   .then(
+//     (res) => {
+//       const { status, a } = res;
+//       console.log(`status:${status}, a:${a}`);
+//     },
+//     (res) => {
+//       const { status, a } = res;
+//       console.log(`status:${status}, a:${a}`);
+//     }
+//   )
+//   .catch((err) => console.log(`err: ${err}`));
 
-Promise.reject("fail").then(
-  (res) => {
-    console.log(`resolve:${res}`);
-  },
-  (res) => {
-    console.log(`reject:${res}`);
-  }
-);
+// Promise.reject("fail").then(
+//   (res) => {
+//     console.log(`resolve:${res}`);
+//   },
+//   (res) => {
+//     console.log(`reject:${res}`);
+//   }
+// );
 
 function getProjectId() {
   return new Promise(function (resolve, reject) {
@@ -60,9 +60,11 @@ async function aaa() {
 
 function abc(isResolved = true){
   return new Promise(function (resolve, reject) {
+    console.log('abc promise new', new Date().getTime())
     setTimeout(() => {
       if(isResolved){
         resolve('ok')
+        console.log('111', new Date().getTime())
       }else{
         reject('fail')
       }
@@ -76,3 +78,5 @@ async function test(){
   const bb = await abc(false)
   console.log(`bb: ${bb}`)
 }
+
+Promise.all([abc(), abc()])

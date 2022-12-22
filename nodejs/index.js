@@ -7,6 +7,8 @@
  * @LastEditors: 谭义洋
  * @LastEditTime: 2022-01-27 13:42:31
  */
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 const http = require("http");
 
 const hostname = "127.0.0.1";
