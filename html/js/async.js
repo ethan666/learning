@@ -18,8 +18,8 @@ async function hello() {
 function pt() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      // reject("erro");
-      resolve('success')
+      reject("erro");
+      // resolve('success')
     }, 1000);
   });
 }

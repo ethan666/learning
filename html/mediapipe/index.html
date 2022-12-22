@@ -22,18 +22,26 @@
       crossorigin="anonymous"
     ></script>
     <style type="text/css">
-      .output{
-        float: right;
-        margin-right: 8px;
-        border: 1px solid #f00;
-        width: 110px;
-        min-height: 60px;
-        max-height: 700px;
-        font-size: 14px;
-        overflow-y: auto;
-      }
+
       .output_canvas{
         transform: scaleX(-1);
+      }
+      .right-wrapper{
+        float: right;
+        margin-right: 2px;
+        display: flex;
+        flex-direction: column;
+      }
+      .right-wrapper button{
+        margin-bottom: 8px;
+      }
+      .output{
+        border: 1px solid #f00;
+        width: 120px;
+        min-height: 60px;
+        max-height: 500px;
+        font-size: 14px;
+        overflow-y: auto;
       }
     </style>
   </head>
@@ -42,7 +50,14 @@
     <div class="container">
       <video class="input_video" style="display: none;"></video>
       <canvas class="output_canvas" width="1280px" height="720px"></canvas>
-      <p class="output"></p>
+      <div class="right-wrapper">
+
+        <button id="clear_btn">clear</button>
+        <button id="direction_btn">左右检测</button>
+        <button id="pan_btn">平移检测</button>
+        <button id="zoom_btn">缩放检测</button>
+        <p class="output"></p>
+      </div>
     </div>
     <script src="./demo.js"></script>
   </body>

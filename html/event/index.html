@@ -66,11 +66,28 @@
     <script>
       var container = document.getElementsByClassName('containor')[0]
       var child1 = document.getElementsByClassName('index1')[0]
+      var box = document.getElementsByClassName('box2')[0]
 
       container.addEventListener('mousedown', onMousedown, { capture: true })
       container.addEventListener('mousedown', onMousedown1)
       child1.addEventListener('mousedown', onMousedownChild, true)
       child1.addEventListener('mousedown', onMousedownChild1)
+
+      box.addEventListener('click', () => {
+        console.log('box click')
+      })
+      
+      box.addEventListener('mousedown', () => {
+        console.log('box mousedown')
+      })
+      
+      box.addEventListener('pointerdown', () => {
+        console.log('box pointerdown')
+      })
+      
+      box.addEventListener('touch', () => {
+        console.log('box touch')
+      })
       
 
       function onClick(event) {
