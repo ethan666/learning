@@ -14,17 +14,23 @@
 async function hello() {
   return "hello";
 }
+hello().then(res => {
+  console.log("res:",res)
+})
+
+const test1 = async () => {
+  const res = await hello();
+  console.log(res)
+}
+test1()
 
 function pt() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject("erro");
-      // resolve('success')
+      reject("error");
     }, 1000);
   });
 }
-
-// hello();
 
 const handleError = (err) => {
   console.log("handleError", err);
@@ -76,5 +82,6 @@ async function asyncTasks() {
   }
 }
 
-asyncTasks(); //it‘ssuccess it‘s error
+// asyncTasks(); //it‘ssuccess it‘s error
+
 /* 另一种方案 */
