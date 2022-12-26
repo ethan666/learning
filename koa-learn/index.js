@@ -32,6 +32,7 @@ app.use(async (ctx, next) => {
   }
 });
 
+// favicon.ico中间件
 app.use(async (ctx, next) => {
   // ignore favicon
   if (ctx.path === "/favicon.ico") {
@@ -43,6 +44,7 @@ app.use(async (ctx, next) => {
 // 配置post提交数据的中间件
 app.use(bodyParser());
 
+// 响应时间打印
 app.use(async (ctx, next) => {
   await next();
   const rt = ctx.response.get("X-Response-Time");
