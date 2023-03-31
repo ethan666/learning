@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>fabric</title></title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="container" width="800" height="600"></canvas>
+    <script src="./libs/fabric.js"></script>
+    <script>
+    
+      // import { fabric } from 'fabric';
+    
+      const canvas = new fabric.Canvas('container');
+      const text = new fabric.Text("你好，hello,0123456", 
+        {
+          // width: 100,
+          // height: 40,
+          fontFamily: 'sans-serif',
+          fontSize: 20,
+          // stroke: '#ff1318',
+          // strokeWidth: 1
+        }
+      );
+  
+      canvas.add(text);
+    
+    </script>
+  </body>
+  <!-- <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "fabric": "https://unpkg.com/browse/fabric@5.3.0-browser/dist/fabric.js"
+      }
+    }
+  </script> -->
+  <script type="module">
+    
+    // import { fabric } from 'fabric';
+  
+    // const canvas = new fabric.Canvas('container');
+    // const text = new fabric.Text("I'm in Comic Sans", 
+    //   {
+    //     fontFamily: 'Comic Sans'
+    //   }
+    // );
+
+    // canvas.add(text);
+  
+  </script>
+</html>
