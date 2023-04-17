@@ -85,3 +85,26 @@ async function test(){
 // Promise.all([abc(), abc(false)]).catch(error => {
 //   console.log('error:',error)
 // })
+
+const wait = (time) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, time)
+  })
+}
+
+const textToFile = async () => {
+  await wait(1000)
+  return 'textToFile result'
+}
+
+const p = Promise.resolve().then(() => {
+  const result = textToFile()
+  console.log('result:'+ result)
+  return result
+})
+
+p.then( (res) => {
+  console.log(res)
+})
