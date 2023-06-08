@@ -105,6 +105,20 @@ const p = Promise.resolve().then(() => {
   return result
 })
 
-p.then( (res) => {
-  console.log(res)
-})
+// p.then( (res) => {
+//   console.log(res)
+// })
+
+{
+  const promise = new Promise(function (resolve, reject) {
+    console.log('test1')
+    resolve(1)
+    console.log('test2')
+    resolve(2)
+    console.log('test3')
+  });
+
+  promise.then(res => {
+    console.log('result:', res)
+  })
+}

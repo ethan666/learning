@@ -13,25 +13,31 @@
   </head>
 
   <body>
-    <canvas id="container" width="800" height="600"></canvas>
+    <canvas id="container" width="800" height="1000"></canvas>
     <script src="./libs/fabric.js"></script>
     <script>
-    
-      // import { fabric } from 'fabric';
-    
       const canvas = new fabric.Canvas('container');
-      const text = new fabric.Text("你好，hello,0123456", 
-        {
-          // width: 100,
-          // height: 40,
+
+      let y = -100
+      const create = (options = {}) => {
+        const defaultOptions = {
           fontFamily: 'sans-serif',
-          fontSize: 20,
-          // stroke: '#ff1318',
-          // strokeWidth: 1
+          fontSize: 300,
+          top: y
         }
-      );
-  
-      canvas.add(text);
+        Object.assign(defaultOptions, options)
+
+        const text = new fabric.Text("n", defaultOptions);
+        y += 200;
+        canvas.add(text);
+      }
+
+      create()
+      create({
+        stroke: '#ff1318',
+        strokeWidth: 6
+      })
+      
     
     </script>
   </body>

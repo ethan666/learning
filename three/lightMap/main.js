@@ -41,10 +41,10 @@ import * as THREE from 'three';
         const axesHelper = new THREE.AxesHelper( 5 );
         scene.add( axesHelper );
 
-				const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.6 );
+				const ambientLight = new THREE.AmbientLight( 0xffffff, 0.6 );
 				scene.add( ambientLight );
 
-				const pointLight = new THREE.PointLight( 0xffffff, 0.5 );
+				const pointLight = new THREE.PointLight( 0xffffff, 0.6 );
 				camera.add( pointLight );
 				scene.add( camera );
 

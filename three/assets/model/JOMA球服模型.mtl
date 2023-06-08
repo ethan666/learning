@@ -1,0 +1,110 @@
+# MTL Exporter
+
+newmtl Material_1
+    Ns 8.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+    Kd 1.38 1.38 1.38
+ // Ke 0.1 0.1 0.1
+	map_Kd fabric_albedo_0g.(2).jpg
+    
+	map_bump synthetic_eco_lor_french_terry_Normalx8.jpg
+	bump Gfabric_normal_2..jpg
+
+
+newmtl Material_2
+Kd 1 1 1
+map_Kd logo_albedo_3..png
+map_Ka logo_albedo_3..png
+map_d logo_albedo_3..png
+d1
+Ns15
+Ni100
+
+newmtl Material_3
+Kd 1 1 1
+map_Kd logo_albedo_5..png
+map_Ka logo_albedo_5..png
+map_d logo_albedo_5..png
+d1
+Ns15
+Ni100
+
+newmtl Material_4
+Kd 1 1 1
+map_Kd logo_albedo_6..png
+map_Ka logo_albedo_6..png
+map_d logo_albedo_6..png
+d1
+Ns15
+Ni100
+
+newmtl Material_5
+Kd 1 1 1
+map_Kd logo_albedo_7..png
+map_Ka logo_albedo_7..png
+map_d logo_albedo_7..png
+d1
+Ns15
+Ni100
+
+newmtl Material_6
+Kd 1 1 1
+map_Kd logo_albedo_0..png
+map_Ka logo_albedo_0..png
+map_d logo_albedo_0..png
+d1
+Ns15
+Ni100
+
+newmtl Material_7
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+Kd 1 1 1
+map_Kd logo_albedo_1..png
+map_Ka logo_albedo_1..png
+map_d logo_albedo_1..png
+d1
+Ns15
+Ni100
+
+newmtl Material_8
+Kd 1 1 1
+map_Kd logo_albedo_4..png
+map_Ka logo_albedo_4..png
+map_d logo_albedo_4..png
+d1
+Ns15
+Ni100
+
+newmtl Material_9
+Kd 1 1 1
+map_Kd logo_albedo_9..png
+d1
+Ns15
+Ni100
+
+newmtl Material_10
+Kd 1 1 1
+map_Kd logo_albedo_2..png
+map_Ka logo_albedo_2..png
+map_d logo_albedo_2..png
+d1
+Ns15
+Ni100
+
+newmtl Material_11
+Kd 1 1 1
+map_Kd logo_albedo_8..png
+map_Ka logo_albedo_8..png
+map_d logo_albedo_8..png
+d1
+Ns15
+Ni100
+
