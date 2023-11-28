@@ -8,7 +8,8 @@
         width: 100px;
         height: 200px;
         background: #aaa;
-        overflow: hidden;
+        /* BFC 块级格式化上下文*/
+        overflow: hidden; 
       }
       .line {
         width: 50px;
@@ -16,12 +17,34 @@
         background: #f00;
         margin: 20px 0;
       }
+      .line1 {
+        width: 50px;
+        height: 50px;
+        background: #0f0;
+        margin: 20px 0;
+      }
+      .text{
+        margin: 10px;
+        padding: 10px;
+      }
+      .picture{
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        /* padding: 10px; */
+      }
     </style>
   </head>
 
   <body>
     <div class="title">
       <div class="line"></div>
+      <div class="line1"></div>
+      <!-- <span class="text">abc123</span> -->
+      <img
+  class="picture"
+  src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"
+  alt="Grapefruit slice atop a pile of other slices" />
     </div>
   </body>
 </html>
